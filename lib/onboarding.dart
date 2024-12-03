@@ -107,7 +107,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/signin');
+                          },
                           child: Text(
                             'Login',
                             style: TextStyle(color: Color(0xFF101317)),
@@ -122,7 +124,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/register');
+                          },
                           child: Text(
                             'Sign Up',
                             style: TextStyle(color: Color(0xFF101317)),
