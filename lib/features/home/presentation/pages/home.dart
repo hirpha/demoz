@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../../auth/presentation/pages/profile.dart';
 import '../widgets/category.dart';
 import '../widgets/domoz_card.dart';
 import '../widgets/employe_composition.dart';
 import '../widgets/tax_item.dart';
 import '../widgets/tax_summery.dart';
-import 'calendar.dart';
-import 'payrolltable.dart';
+import '../../../payroll/presentation/pages/calendar.dart';
+import '../../../payroll/presentation/pages/payrolltable.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -38,113 +39,116 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: const Color.fromARGB(255, 247, 247, 247),
       body: _selectedIndex == 1
           ? PayrollTable()
-          : Column(
-              children: [
-                SizedBox(height: MediaQuery.of(context).padding.top + 20),
-                Container(
-                  height: 60,
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: const Text(
-                          'Home',
-                          style: TextStyle(
-                            fontSize: 26,
-                            fontWeight: FontWeight.bold,
+          : _selectedIndex == 2
+              ? ProfileScreen()
+              : Column(
+                  children: [
+                    SizedBox(height: MediaQuery.of(context).padding.top + 20),
+                    Container(
+                      height: 60,
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            child: const Text(
+                              'Home',
+                              style: TextStyle(
+                                fontSize: 26,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                      IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Icons.settings),
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      DomozCard(
-                          title: 'Number of Employees',
-                          amount: '2',
-                          onTap: () {},
-                          borderColor: Colors.grey,
-                          backgroundColor: const Color(0xFF3085FE)),
-                      const SizedBox(width: 10),
-                      DomozCard(
-                          title: 'Income Tax paid',
-                          amount: '2000',
-                          onTap: () {},
-                          borderColor: Colors.grey,
-                          backgroundColor: const Color(0xFFA3D139)),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 10),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      DomozCard(
-                          title: 'Pension Tax paid',
-                          amount: '2000',
-                          onTap: () {},
-                          borderColor: Colors.grey,
-                          backgroundColor: const Color(0xFF30BEB6)),
-                      const SizedBox(width: 10),
-                      DomozCard(
-                          title: 'Employees Performance',
-                          amount: '95%',
-                          onTap: () {},
-                          borderColor: Colors.grey,
-                          backgroundColor: const Color(0xFFFF7F74)),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 10),
-                Category(
-                  onPressed: changeActiveButton,
-                  activeButton: activeButton,
-                ),
-                const SizedBox(height: 10),
-                const TaxItem(),
-                const SizedBox(height: 10),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: Container(
-                          constraints: BoxConstraints(
-                            minHeight: 150,
-                            maxHeight: MediaQuery.of(context).size.height * 0.3,
+                          IconButton(
+                            onPressed: () {},
+                            icon: const Icon(Icons.settings),
                           ),
-                          child: EmployeeComposition(),
-                        ),
+                        ],
                       ),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: Container(
-                          constraints: BoxConstraints(
-                            minHeight: 150,
-                            maxHeight:
-                                MediaQuery.of(context).size.height * 0.24,
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          DomozCard(
+                              title: 'Number of Employees',
+                              amount: '2',
+                              onTap: () {},
+                              borderColor: Colors.grey,
+                              backgroundColor: const Color(0xFF3085FE)),
+                          const SizedBox(width: 10),
+                          DomozCard(
+                              title: 'Income Tax paid',
+                              amount: '2000',
+                              onTap: () {},
+                              borderColor: Colors.grey,
+                              backgroundColor: const Color(0xFFA3D139)),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          DomozCard(
+                              title: 'Pension Tax paid',
+                              amount: '2000',
+                              onTap: () {},
+                              borderColor: Colors.grey,
+                              backgroundColor: const Color(0xFF30BEB6)),
+                          const SizedBox(width: 10),
+                          DomozCard(
+                              title: 'Employees Performance',
+                              amount: '95%',
+                              onTap: () {},
+                              borderColor: Colors.grey,
+                              backgroundColor: const Color(0xFFFF7F74)),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    Category(
+                      onPressed: changeActiveButton,
+                      activeButton: activeButton,
+                    ),
+                    const SizedBox(height: 10),
+                    const TaxItem(),
+                    const SizedBox(height: 10),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: Container(
+                              constraints: BoxConstraints(
+                                minHeight: 150,
+                                maxHeight:
+                                    MediaQuery.of(context).size.height * 0.3,
+                              ),
+                              child: EmployeeComposition(),
+                            ),
                           ),
-                          child: const TaxSummery(),
-                        ),
+                          const SizedBox(width: 10),
+                          Expanded(
+                            child: Container(
+                              constraints: BoxConstraints(
+                                minHeight: 150,
+                                maxHeight:
+                                    MediaQuery.of(context).size.height * 0.24,
+                              ),
+                              child: const TaxSummery(),
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,

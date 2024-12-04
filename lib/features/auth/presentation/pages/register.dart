@@ -126,7 +126,11 @@ class _RegisterPageState extends State<RegisterPage> {
                   onPressed: () {
                     Navigator.pushNamed(context, '/home');
                   },
-                  child: const Text('Submit Proposal'),
+                  child: const Text('Submit Proposal',
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.black)),
                 ),
               ),
             ],

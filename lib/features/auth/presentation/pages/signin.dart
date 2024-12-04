@@ -136,7 +136,11 @@ class _SignInPageState extends State<SignInPage> {
                 onPressed: () {
                   Navigator.pushNamed(context, '/home');
                 },
-                child: const Text('Sign In'),
+                child: const Text('Sign In',
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.black)),
               ),
             ),
             const SizedBox(height: 20),
