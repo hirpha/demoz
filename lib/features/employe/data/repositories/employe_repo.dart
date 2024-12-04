@@ -7,22 +7,42 @@ class EmployeRepo {
   EmployeRepo({required this.employeeDataSource});
 
   Future<List<Employee>> getEmployees(String companyId) async {
-    return await employeeDataSource.getEmployees(companyId);
+    try {
+      return await employeeDataSource.getEmployees(companyId);
+    } catch (e) {
+      rethrow;
+    }
   }
 
   Future<Employee> getEmployee(String employeeId) async {
-    return await employeeDataSource.getEmployee(employeeId);
+    try {
+      return await employeeDataSource.getEmployee(employeeId);
+    } catch (e) {
+      rethrow;
+    }
   }
 
   Future<Employee> createEmployee(Employee employee) async {
-    return await employeeDataSource.createEmployee(employee);
+    try {
+      return await employeeDataSource.createEmployee(employee);
+    } catch (e) {
+      rethrow;
+    }
   }
 
   Future<Employee> updateEmployee(Employee employee) async {
-    return await employeeDataSource.updateEmployee(employee);
+    try {
+      return await employeeDataSource.updateEmployee(employee);
+    } catch (e) {
+      rethrow;
+    }
   }
 
   Future<void> deleteEmployee(String employeeId) async {
-    return await employeeDataSource.deleteEmployee(employeeId);
+    try {
+      return await employeeDataSource.deleteEmployee(employeeId);
+    } catch (e) {
+      rethrow;
+    }
   }
 }

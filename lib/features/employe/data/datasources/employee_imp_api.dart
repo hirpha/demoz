@@ -9,33 +9,52 @@ class EmployeeImpApi extends EmployeeDataSource {
 
   @override
   Future<List<Employee>> getEmployees(String companyId) async {
-    return employeeBox.values.where((e) => e.companyId == companyId).toList();
+    try {
+      return employeeBox.values.where((e) => e.companyId == companyId).toList();
+    } catch (e) {
+      rethrow;
+    }
   }
 
   @override
   Future<Employee> getEmployee(String employeeId) async {
-    var employee = employeeBox.values.firstWhere(
-      (e) => e.empoyeeId == employeeId,
-      orElse: () => throw Exception('Employee not found'),
-    );
-    return employee;
+    try {
+      return employeeBox.values.firstWhere(
+        (e) => e.empoyeeId == employeeId,
+        orElse: () => throw Exception('Employee not found'),
+      );
+    } catch (e) {
+      rethrow;
+    }
   }
 
   @override
   Future<Employee> createEmployee(Employee employee) async {
-    await employeeBox.put(employee.empoyeeId, employee);
-    return employee;
+    try {
+      await employeeBox.put(employee.empoyeeId, employee);
+      return employee;
+    } catch (e) {
+      rethrow;
+    }
   }
 
   @override
   Future<Employee> updateEmployee(Employee employee) async {
-    await employeeBox.put(employee.empoyeeId, employee);
-    return employee;
+    try {
+      await employeeBox.put(employee.empoyeeId, employee);
+      return employee;
+    } catch (e) {
+      rethrow;
+    }
   }
 
   @override
   Future<void> deleteEmployee(String employeeId) async {
-    await employeeBox.delete(employeeId);
+    try {
+      await employeeBox.delete(employeeId);
+    } catch (e) {
+      rethrow;
+    }
   }
 
   @override
@@ -56,6 +75,10 @@ class EmployeeImpApi extends EmployeeDataSource {
 
   @override
   Future<int> numberOfEmployees(String companyId) async {
-    return employeeBox.values.where((e) => e.companyId == companyId).length;
+    try {
+      return employeeBox.values.where((e) => e.companyId == companyId).length;
+    } catch (e) {
+      rethrow;
+    }
   }
 }
