@@ -4,6 +4,7 @@ import 'package:demoz/onboarding.dart';
 import 'package:demoz/splash.dart';
 import 'package:flutter/material.dart';
 
+import 'features/employe/presentation/pages/employee.dart';
 import 'features/home/presentation/pages/calendar.dart';
 import 'features/home/presentation/pages/home.dart';
 
@@ -42,6 +43,9 @@ class MyApp extends StatelessWidget {
           case '/calendar':
             return MaterialPageRoute(
                 builder: (context) => const CalendarPage());
+          case '/employee':
+            return MaterialPageRoute(
+                builder: (context) => const EmployeeScreen());
           default:
             return MaterialPageRoute(
                 builder: (context) => const SplashScreen());

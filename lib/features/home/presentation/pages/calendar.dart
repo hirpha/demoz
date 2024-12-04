@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'payrolltable.dart';
+
 class CalendarPage extends StatefulWidget {
   const CalendarPage({super.key});
 
@@ -19,6 +21,7 @@ class _CalendarPageState extends State<CalendarPage> {
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Text('Calendar'),
           ),
+          PayrollTable(),
         ],
       ),
     );

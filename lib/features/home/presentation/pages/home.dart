@@ -7,6 +7,7 @@ import '../widgets/employe_composition.dart';
 import '../widgets/tax_item.dart';
 import '../widgets/tax_summery.dart';
 import 'calendar.dart';
+import 'payrolltable.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -36,7 +37,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 247, 247, 247),
       body: _selectedIndex == 1
-          ? const CalendarPage()
+          ? PayrollTable()
           : Column(
               children: [
                 SizedBox(height: MediaQuery.of(context).padding.top + 20),
