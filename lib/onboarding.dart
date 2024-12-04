@@ -46,16 +46,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           width: 100,
                           height: 10,
                           decoration: BoxDecoration(
-                            color: Color(0xFF579AFC),
+                            color: const Color(0xFF579AFC),
                             borderRadius: BorderRadius.circular(10),
                           ),
                         ),
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                         Container(
                           width: 30,
                           height: 10,
                           decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 159, 159, 159),
+                            color: const Color.fromARGB(255, 159, 159, 159),
                             borderRadius: BorderRadius.circular(10),
                           ),
                         ),
@@ -100,8 +100,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       children: [
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            fixedSize: Size(141, 60),
-                            backgroundColor: Color(0xFFEEEFF0),
+                            fixedSize: const Size(141, 60),
+                            backgroundColor: const Color(0xFFEEEFF0),
                             elevation: 0,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10),
@@ -110,15 +110,15 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           onPressed: () {
                             Navigator.pushNamed(context, '/signin');
                           },
-                          child: Text(
+                          child: const Text(
                             'Login',
                             style: TextStyle(color: Color(0xFF101317)),
                           ),
                         ),
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            fixedSize: Size(141, 60),
-                            backgroundColor: Color(0xFFEEEFF0),
+                            fixedSize: const Size(141, 60),
+                            backgroundColor: const Color(0xFFEEEFF0),
                             elevation: 0,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10),
@@ -127,7 +127,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           onPressed: () {
                             Navigator.pushNamed(context, '/register');
                           },
-                          child: Text(
+                          child: const Text(
                             'Sign Up',
                             style: TextStyle(color: Color(0xFF101317)),
                           ),
@@ -135,7 +135,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       ],
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                 ],
               ),
             ),
