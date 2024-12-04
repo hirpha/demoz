@@ -34,6 +34,9 @@ class Employee extends HiveObject {
   @HiveField(9)
   String? startDate;
 
+  @HiveField(10)
+  String? companyId;
+
   Employee({
     this.empoyeeId,
     this.email,
@@ -45,5 +48,6 @@ class Employee extends HiveObject {
     this.grossSalary,
     this.taxableEarnings,
     this.startDate,
+    this.companyId,
   });
 }

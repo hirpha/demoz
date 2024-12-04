@@ -5,12 +5,16 @@ class CustomTextField extends StatelessWidget {
   final IconData? icon;
   final String label;
   final TextEditingController controller;
+  final bool readOnly;
+  final String? initialValue;
   const CustomTextField(
       {super.key,
       required this.hintText,
       required this.icon,
       required this.label,
-      required this.controller});
+      required this.controller,
+      required this.readOnly,
+      required this.initialValue});
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +29,8 @@ class CustomTextField extends StatelessWidget {
         Container(
           margin: const EdgeInsets.symmetric(horizontal: 20),
           child: TextFormField(
+            readOnly: readOnly,
+            initialValue: initialValue,
             decoration: InputDecoration(
               hintText: hintText,
               hintStyle: TextStyle(color: Colors.grey[400]),

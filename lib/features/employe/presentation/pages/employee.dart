@@ -20,7 +20,12 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
       TextEditingController();
 
   bool isAllFieldValid() {
-    return true;
+    return employeeNameController.text.isNotEmpty &&
+        emailController.text.isNotEmpty &&
+        phoneNumberController.text.isNotEmpty &&
+        tinNumberController.text.isNotEmpty &&
+        grossSalaryController.text.isNotEmpty &&
+        taxableEarningsController.text.isNotEmpty;
   }
 
   @override
@@ -81,6 +86,8 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
                 controller: employeeNameController,
                 onChange: (value) {
                   isAllFieldValid();
+                  setState(() {});
+                  setState(() {});
                 },
               ),
               SizedBox(height: 20),
@@ -89,6 +96,7 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
                 controller: emailController,
                 onChange: (value) {
                   isAllFieldValid();
+                  setState(() {});
                 },
               ),
               SizedBox(height: 20),
@@ -97,6 +105,7 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
                 controller: phoneNumberController,
                 onChange: (value) {
                   isAllFieldValid();
+                  setState(() {});
                 },
               ),
               SizedBox(height: 20),
@@ -105,6 +114,7 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
                 controller: tinNumberController,
                 onChange: (value) {
                   isAllFieldValid();
+                  setState(() {});
                 },
               ),
               SizedBox(height: 20),
@@ -113,6 +123,7 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
                 controller: grossSalaryController,
                 onChange: (value) {
                   isAllFieldValid();
+                  setState(() {});
                 },
               ),
               SizedBox(height: 20),
@@ -121,6 +132,7 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
                 controller: taxableEarningsController,
                 onChange: (value) {
                   isAllFieldValid();
+                  setState(() {});
                 },
               ),
               SizedBox(height: 20),
@@ -129,6 +141,7 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
                 controller: startingDateOfSalaryController,
                 onChange: (value) {
                   isAllFieldValid();
+                  setState(() {});
                 },
               ),
               SizedBox(height: 20),
@@ -171,11 +184,13 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
                   child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         elevation: 0,
-                        backgroundColor: Color(0xFF3085FE),
+                        backgroundColor: isAllFieldValid()
+                            ? Color(0xFF3085FE)
+                            : Color(0xFFACAFB5),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10)),
                       ),
-                      onPressed: () {},
+                      onPressed: isAllFieldValid() ? () {} : null,
                       child: Text("Add Employee",
                           style: TextStyle(color: Colors.white)))),
               SizedBox(height: 40),
