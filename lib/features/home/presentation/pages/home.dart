@@ -4,6 +4,7 @@ import '../widgets/category.dart';
 import '../widgets/domoz_card.dart';
 import '../widgets/employe_composition.dart';
 import '../widgets/tax_item.dart';
+import '../widgets/tax_summery.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -97,9 +98,25 @@ class _HomePageState extends State<HomePage> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                EmployeeComposition(),
+                Expanded(
+                  child: Container(
+                    constraints: BoxConstraints(
+                      minHeight: 150,
+                      maxHeight: MediaQuery.of(context).size.height * 0.3,
+                    ),
+                    child: EmployeeComposition(),
+                  ),
+                ),
                 const SizedBox(width: 10),
-                EmployeeComposition(),
+                Expanded(
+                  child: Container(
+                    constraints: BoxConstraints(
+                      minHeight: 150,
+                      maxHeight: MediaQuery.of(context).size.height * 0.24,
+                    ),
+                    child: const TaxSummery(),
+                  ),
+                ),
               ],
             ),
           ),
