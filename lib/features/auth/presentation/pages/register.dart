@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import '../widgets/textfiled.dart';
 
 class RegisterPage extends StatefulWidget {
-  const RegisterPage({super.key});
+  final String email;
+  final String password;
+  const RegisterPage({super.key, required this.email, required this.password});
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
@@ -19,6 +21,16 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController companyBankController = TextEditingController();
   final TextEditingController bankAccountNumberController =
       TextEditingController();
+
+  bool isAllFieldValid() {
+    return companyNameController.text.isNotEmpty &&
+        addressController.text.isNotEmpty &&
+        phoneNumberController.text.isNotEmpty &&
+        tinNumberController.text.isNotEmpty &&
+        numberOfEmployeesController.text.isNotEmpty &&
+        companyBankController.text.isNotEmpty &&
+        bankAccountNumberController.text.isNotEmpty;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -80,36 +92,71 @@ class _RegisterPageState extends State<RegisterPage> {
               TextFieldWidget(
                 controller: companyNameController,
                 hintText: 'Company Name',
+                onChange: (value) {
+                  setState(() {
+                    isAllFieldValid();
+                  });
+                },
               ),
               const SizedBox(height: 20),
               TextFieldWidget(
                 controller: addressController,
                 hintText: 'Address of the company',
+                onChange: (value) {
+                  setState(() {
+                    isAllFieldValid();
+                  });
+                },
               ),
               const SizedBox(height: 20),
               TextFieldWidget(
                 controller: phoneNumberController,
                 hintText: 'Phone Number',
+                onChange: (value) {
+                  setState(() {
+                    isAllFieldValid();
+                  });
+                },
               ),
               const SizedBox(height: 20),
               TextFieldWidget(
                 controller: tinNumberController,
                 hintText: 'TIN Number',
+                onChange: (value) {
+                  setState(() {
+                    isAllFieldValid();
+                  });
+                },
               ),
               const SizedBox(height: 20),
               TextFieldWidget(
                 controller: numberOfEmployeesController,
                 hintText: 'Number of Employees',
+                onChange: (value) {
+                  setState(() {
+                    isAllFieldValid();
+                  });
+                },
               ),
               const SizedBox(height: 20),
               TextFieldWidget(
                 controller: companyBankController,
                 hintText: 'Company Bank',
+                onChange: (value) {
+                  setState(() {
+                    isAllFieldValid();
+                  });
+                },
               ),
               const SizedBox(height: 20),
               TextFieldWidget(
                 controller: bankAccountNumberController,
                 hintText: 'Bank Account Number',
+                onChange: (value) {
+                  setState(() {
+                    isAllFieldValid();
+                  });
+                },
               ),
               const SizedBox(height: 20),
               Container(
@@ -118,19 +165,25 @@ class _RegisterPageState extends State<RegisterPage> {
                 margin: const EdgeInsets.symmetric(horizontal: 20),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(255, 218, 218, 218),
+                    backgroundColor: !isAllFieldValid()
+                        ? const Color.fromARGB(255, 218, 218, 218)
+                        : const Color(0xFF3085FE),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15),
                     ),
                   ),
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/home');
-                  },
-                  child: const Text('Submit Proposal',
+                  onPressed: !isAllFieldValid()
+                      ? null
+                      : () {
+                          Navigator.pushNamed(context, '/home');
+                        },
+                  child: Text('Submit Proposal',
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w400,
-                          color: Colors.black)),
+                          color: !isAllFieldValid()
+                              ? Colors.black
+                              : const Color.fromARGB(255, 255, 255, 255))),
                 ),
               ),
             ],

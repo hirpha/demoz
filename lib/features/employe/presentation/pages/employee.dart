@@ -9,6 +9,20 @@ class EmployeeScreen extends StatefulWidget {
 }
 
 class _EmployeeScreenState extends State<EmployeeScreen> {
+  final TextEditingController employeeNameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController phoneNumberController = TextEditingController();
+  final TextEditingController tinNumberController = TextEditingController();
+  final TextEditingController grossSalaryController = TextEditingController();
+  final TextEditingController taxableEarningsController =
+      TextEditingController();
+  final TextEditingController startingDateOfSalaryController =
+      TextEditingController();
+
+  bool isAllFieldValid() {
+    return true;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,37 +78,58 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
               SizedBox(height: 20),
               TextFieldWidget(
                 hintText: "Employee Name",
-                controller: TextEditingController(),
+                controller: employeeNameController,
+                onChange: (value) {
+                  isAllFieldValid();
+                },
               ),
               SizedBox(height: 20),
               TextFieldWidget(
                 hintText: "Email Address",
-                controller: TextEditingController(),
+                controller: emailController,
+                onChange: (value) {
+                  isAllFieldValid();
+                },
               ),
               SizedBox(height: 20),
               TextFieldWidget(
                 hintText: "Phone Number",
-                controller: TextEditingController(),
+                controller: phoneNumberController,
+                onChange: (value) {
+                  isAllFieldValid();
+                },
               ),
               SizedBox(height: 20),
               TextFieldWidget(
                 hintText: "TIN Number",
-                controller: TextEditingController(),
+                controller: tinNumberController,
+                onChange: (value) {
+                  isAllFieldValid();
+                },
               ),
               SizedBox(height: 20),
               TextFieldWidget(
                 hintText: "Gross Salary",
-                controller: TextEditingController(),
+                controller: grossSalaryController,
+                onChange: (value) {
+                  isAllFieldValid();
+                },
               ),
               SizedBox(height: 20),
               TextFieldWidget(
                 hintText: "Taxable Earnings",
-                controller: TextEditingController(),
+                controller: taxableEarningsController,
+                onChange: (value) {
+                  isAllFieldValid();
+                },
               ),
               SizedBox(height: 20),
               TextFieldWidget(
                 hintText: "Starting Date of Salary",
-                controller: TextEditingController(),
+                controller: startingDateOfSalaryController,
+                onChange: (value) {
+                  isAllFieldValid();
+                },
               ),
               SizedBox(height: 20),
               Container(

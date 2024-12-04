@@ -3,8 +3,12 @@ import 'package:flutter/material.dart';
 class TextFieldWidget extends StatelessWidget {
   final String hintText;
   final TextEditingController controller;
+  final Function onChange;
   const TextFieldWidget(
-      {super.key, required this.hintText, required this.controller});
+      {super.key,
+      required this.hintText,
+      required this.controller,
+      required this.onChange});
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +31,9 @@ class TextFieldWidget extends StatelessWidget {
           ),
           TextField(
             controller: controller,
+            onChanged: (value) {
+              onChange(value);
+            },
             decoration: InputDecoration.collapsed(
               hintText: '',
               hintStyle: TextStyle(color: Color(0xFFACAFB5), fontSize: 14),

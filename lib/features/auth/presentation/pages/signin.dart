@@ -14,6 +14,23 @@ class _SignInPageState extends State<SignInPage> {
   bool _obscureText = true;
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  bool isAllFieldValid() {
+    return emailController.text.isNotEmpty &&
+        passwordController.text.isNotEmpty;
+  }
+
+  emailOnChange(String value) {
+    setState(() {
+      isAllFieldValid();
+    });
+    print(isAllFieldValid());
+  }
+
+  passwordOnChange(String value) {
+    setState(() {
+      isAllFieldValid();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,6 +87,7 @@ class _SignInPageState extends State<SignInPage> {
             ),
             const SizedBox(height: 20),
             TextFieldWidget(
+              onChange: emailOnChange,
               hintText: 'Email Address',
               controller: emailController,
             ),
@@ -87,7 +105,7 @@ class _SignInPageState extends State<SignInPage> {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Expanded(
+                  Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -97,6 +115,10 @@ class _SignInPageState extends State<SignInPage> {
                               TextStyle(color: Color(0xFFACAFB5), fontSize: 14),
                         ),
                         TextField(
+                          onChanged: (value) {
+                            passwordOnChange(value);
+                          },
+                          controller: passwordController,
                           decoration: InputDecoration.collapsed(
                             hintText: '',
                             hintStyle: TextStyle(
@@ -128,19 +150,28 @@ class _SignInPageState extends State<SignInPage> {
                 style: ElevatedButton.styleFrom(
                   elevation: 0,
                   fixedSize: const Size(double.infinity, 6),
-                  backgroundColor: const Color(0xFFEEEFF0),
+                  backgroundColor: !isAllFieldValid()
+                      ? const Color.fromARGB(255, 255, 255, 255)
+                      : const Color(0xFF3085FE),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),
                   ),
                 ),
-                onPressed: () {
-                  Navigator.pushNamed(context, '/home');
-                },
-                child: const Text('Sign In',
+                onPressed: !isAllFieldValid()
+                    ? null
+                    : () {
+                        Navigator.pushNamed(context, '/register', arguments: {
+                          'email': emailController.text,
+                          'password': passwordController.text,
+                        });
+                      },
+                child: Text('Sign In',
                     style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w400,
-                        color: Colors.black)),
+                        color: isAllFieldValid()
+                            ? Color.fromARGB(255, 255, 255, 255)
+                            : Colors.black)),
               ),
             ),
             const SizedBox(height: 20),

@@ -36,8 +36,12 @@ class MyApp extends StatelessWidget {
           case '/signin':
             return MaterialPageRoute(builder: (context) => const SignInPage());
           case '/register':
+            final args = settings.arguments as Map<String, String>;
             return MaterialPageRoute(
-                builder: (context) => const RegisterPage());
+                builder: (context) => RegisterPage(
+                      email: args['email'] ?? '',
+                      password: args['password'] ?? '',
+                    ));
           case '/home':
             return MaterialPageRoute(builder: (context) => const HomePage());
           case '/calendar':
