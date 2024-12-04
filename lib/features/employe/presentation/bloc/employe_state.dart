@@ -16,7 +16,7 @@ class EmployeLoaded extends EmployeState {}
 class EmployeError extends EmployeState {
   final String message;
 
-  const EmployeError(this.message);
+  const EmployeError({required this.message});
 }
 
 class EmployeCreateEmployeeLoading extends EmployeState {}
@@ -24,7 +24,13 @@ class EmployeCreateEmployeeLoading extends EmployeState {}
 class EmployeCreateEmployeeSuccess extends EmployeState {
   final Employee employee;
 
-  const EmployeCreateEmployeeSuccess(this.employee);
+  const EmployeCreateEmployeeSuccess({required this.employee});
+}
+
+class EmployeCreateEmployeeFailure extends EmployeState {
+  final String message;
+
+  const EmployeCreateEmployeeFailure({required this.message});
 }
 
 class EmployeUpdateEmployeeLoading extends EmployeState {}
@@ -32,29 +38,49 @@ class EmployeUpdateEmployeeLoading extends EmployeState {}
 class EmployeUpdateEmployeeSuccess extends EmployeState {
   final Employee employee;
 
-  const EmployeUpdateEmployeeSuccess(this.employee);
+  const EmployeUpdateEmployeeSuccess({required this.employee});
+}
+
+class EmployeUpdateEmployeeFailure extends EmployeState {
+  final String message;
+
+  const EmployeUpdateEmployeeFailure({required this.message});
 }
 
 class EmployeDeleteEmployeeLoading extends EmployeState {}
 
-class EmployeDeleteEmployeeFailed extends EmployeState {}
+class EmployeDeleteEmployeeSuccess extends EmployeState {}
+
+class EmployeDeleteEmployeeFailure extends EmployeState {
+  final String message;
+
+  const EmployeDeleteEmployeeFailure({required this.message});
+}
 
 class EmployeGetEmployeesLoading extends EmployeState {}
 
 class EmployeGetEmployeesSuccess extends EmployeState {
   final List<Employee> employees;
 
-  const EmployeGetEmployeesSuccess(this.employees);
+  const EmployeGetEmployeesSuccess({required this.employees});
 }
 
-class EmployeGetEmployeesFailed extends EmployeState {}
+class EmployeGetEmployeesFailure extends EmployeState {
+  final String message;
+
+  const EmployeGetEmployeesFailure({required this.message});
+}
 
 class EmployeGetEmployeeLoading extends EmployeState {}
 
 class EmployeGetEmployeeSuccess extends EmployeState {
   final Employee employee;
 
-  const EmployeGetEmployeeSuccess(this.employee);
+  const EmployeGetEmployeeSuccess({required this.employee});
 }
 
-class EmployeGetEmployeeFailed extends EmployeState {}
+class EmployeGetEmployeeFailure extends EmployeState {
+  final String message;
+
+  const EmployeGetEmployeeFailure({required this.message});
+}

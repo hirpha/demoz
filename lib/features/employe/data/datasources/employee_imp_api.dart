@@ -35,7 +35,7 @@ class EmployeeImpApi extends EmployeeDataSource {
     await box. delete(employeeId);
   }
 
-  @override
+  @override 
   Future<int> totalIncomeTax(String companyId) async {
     return 0;
   }
