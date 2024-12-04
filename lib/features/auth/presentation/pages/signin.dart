@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/textfiled.dart';
+
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
 
@@ -9,6 +11,8 @@ class SignInPage extends StatefulWidget {
 
 class _SignInPageState extends State<SignInPage> {
   bool _obscureText = true;
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -64,82 +68,53 @@ class _SignInPageState extends State<SignInPage> {
               ),
             ),
             const SizedBox(height: 20),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 20),
-              alignment: Alignment.centerLeft,
-              height: 60,
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(15),
-                border: Border.all(color: const Color(0xFFADADAD)),
-              ),
-              child: const Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Email Address',
-                    style: TextStyle(color: Color(0xFFACAFB5), fontSize: 14),
-                  ),
-                  TextField(
-                    decoration: InputDecoration.collapsed(
-                      hintText: '',
-                      hintStyle:
-                          TextStyle(color: Color(0xFFACAFB5), fontSize: 14),
-                    ),
-                  ),
-                ],
-              ),
+            TextFieldWidget(
+              hintText: 'Email Address',
+              controller: emailController,
+            ),
+            const SizedBox(height: 20),
+            TextFieldWidget(
+              hintText: 'Password',
+              controller: passwordController,
             ),
             const SizedBox(height: 20),
             Container(
-                margin: const EdgeInsets.symmetric(horizontal: 20),
-                alignment: Alignment.centerLeft,
-                height: 60,
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(15),
-                  border: Border.all(color: const Color(0xFFADADAD)),
-                ),
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(children: [
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text(
-                                'Password',
-                                style: TextStyle(
-                                    color: Color(0xFFACAFB5), fontSize: 14),
-                              ),
-                              TextField(
-                                obscureText: _obscureText,
-                                decoration: InputDecoration.collapsed(
-                                  hintText: '',
-                                  hintStyle: const TextStyle(
-                                      color: Color(0xFFACAFB5), fontSize: 14),
-                                ),
-                              ),
-                            ],
+                  Row(children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Password',
+                            style: TextStyle(
+                                color: Color(0xFFACAFB5), fontSize: 14),
                           ),
-                        ),
-                        IconButton(
-                          icon: Icon(
-                            _obscureText
-                                ? Icons.visibility
-                                : Icons.visibility_off,
+                          TextField(
+                            obscureText: _obscureText,
+                            decoration: InputDecoration.collapsed(
+                              hintText: '',
+                              hintStyle: const TextStyle(
+                                  color: Color(0xFFACAFB5), fontSize: 14),
+                            ),
                           ),
-                          onPressed: () {
-                            setState(() {
-                              _obscureText = !_obscureText;
-                            });
-                          },
-                        ),
-                      ]),
-                    ])),
+                        ],
+                      ),
+                    ),
+                    IconButton(
+                      icon: Icon(
+                        _obscureText ? Icons.visibility : Icons.visibility_off,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _obscureText = !_obscureText;
+                        });
+                      },
+                    ),
+                  ]),
+                ])),
             const SizedBox(height: 20),
             Container(
               height: 60,
