@@ -1,5 +1,7 @@
 import 'package:demoz/features/auth/presentation/pages/register.dart';
 import 'package:demoz/features/auth/presentation/pages/signin.dart';
+import 'package:demoz/features/employe/data/datasources/employee_imp_api.dart';
+import 'package:demoz/features/employe/presentation/bloc/employe_bloc.dart';
 import 'package:demoz/onboarding.dart';
 import 'package:demoz/splash.dart';
 import 'package:flutter/material.dart';
@@ -43,12 +45,19 @@ class MyApp extends StatelessWidget {
             create: (context) =>
                 AuthRepository(dataSource: context.read<AuthDataSource>()),
           ),
+          RepositoryProvider<EmployeeImpApi>(
+            create: (context) => EmployeeImpApi(),
+          ),
         ],
         child: MultiBlocProvider(
           providers: [
             BlocProvider<AuthBloc>(
               create: (context) =>
                   AuthBloc(authRepository: context.read<AuthRepository>()),
+            ),
+            BlocProvider<EmployeBloc>(
+              create: (context) =>
+                  EmployeBloc(employeeImpApi: context.read<EmployeeImpApi>()),
             ),
           ],
           child: MaterialApp(

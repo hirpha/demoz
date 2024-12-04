@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../employe/presentation/bloc/employe_bloc.dart';
 
 class PayrollTable extends StatelessWidget {
   @override
@@ -13,7 +16,7 @@ class PayrollTable extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
+                const Row(
                   children: [
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,33 +57,49 @@ class PayrollTable extends StatelessWidget {
           SizedBox(),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
-            child: Expanded(
-              child: DataTable(
-                dataRowColor: MaterialStateColor.resolveWith((states) {
-                  return Colors.transparent;
-                }),
-                columns: const [
-                  DataColumn(label: Text('Employees')),
-                  DataColumn(label: Text('Net Salary')),
-                  DataColumn(label: Text('Taxable Earnings')),
-                  DataColumn(label: Text('Income Tax')),
-                  DataColumn(label: Text('Pension Tax')),
-                  DataColumn(label: Text('Gross Pay')),
-                  DataColumn(label: Text('Action')),
-                ],
-                rows: List<DataRow>.generate(
-                  7,
-                  (index) => buildRow(
-                    index % 2 == 1 ? Colors.grey.shade200 : Colors.transparent,
-                    2000,
-                    5000,
-                    5000,
-                    5000,
-                    20000,
-                    'John Doe',
-                  ),
-                ),
-              ),
+            child: BlocConsumer<EmployeBloc, EmployeState>(
+              listener: (context, state) {
+                if (state is EmployeGetEmployeesFailed) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Failed to get employees')),
+                  );
+                }
+              },
+              builder: (context, state) {
+                if (state is EmployeGetEmployeesSuccess) {
+                  return Expanded(
+                    child: DataTable(
+                      dataRowColor: MaterialStateColor.resolveWith((states) {
+                        return Colors.transparent;
+                      }),
+                      columns: const [
+                        DataColumn(label: Text('Employees')),
+                        DataColumn(label: Text('Net Salary')),
+                        DataColumn(label: Text('Taxable Earnings')),
+                        DataColumn(label: Text('Income Tax')),
+                        DataColumn(label: Text('Pension Tax')),
+                        DataColumn(label: Text('Gross Pay')),
+                        DataColumn(label: Text('Action')),
+                      ],
+                      rows: List<DataRow>.generate(
+                        state.employees.length,
+                        (index) => buildRow(
+                          index % 2 == 1
+                              ? Colors.grey.shade200
+                              : Colors.transparent,
+                          state.employees[index].grossSalary ?? 0,
+                          state.employees[index].grossSalary ?? 0,
+                          state.employees[index].grossSalary ?? 0,
+                          state.employees[index].grossSalary ?? 0,
+                          state.employees[index].grossSalary ?? 0,
+                          state.employees[index].employeeName ?? '',
+                        ),
+                      ),
+                    ),
+                  );
+                }
+                return const SizedBox();
+              },
             ),
           ),
         ],

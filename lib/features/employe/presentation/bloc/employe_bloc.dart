@@ -10,7 +10,7 @@ part 'employe_state.dart';
 class EmployeBloc extends Bloc<EmployeEvent, EmployeState> {
   final EmployeeImpApi employeeImpApi;
 
-  EmployeBloc(this.employeeImpApi) : super(EmployeInitial()) {
+  EmployeBloc({required this.employeeImpApi}) : super(EmployeInitial()) {
     on<EmployeEvent>((event, emit) {
       // TODO: implement event handler
     });
