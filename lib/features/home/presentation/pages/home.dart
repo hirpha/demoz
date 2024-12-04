@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../widgets/category.dart';
 import '../widgets/domoz_card.dart';
+import '../widgets/employe_composition.dart';
 import '../widgets/tax_item.dart';
 
 class HomePage extends StatefulWidget {
@@ -90,6 +91,18 @@ class _HomePageState extends State<HomePage> {
           ),
           const SizedBox(height: 10),
           const TaxItem(),
+          const SizedBox(height: 10),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                EmployeeComposition(),
+                const SizedBox(width: 10),
+                EmployeeComposition(),
+              ],
+            ),
+          ),
         ],
       ),
     );
