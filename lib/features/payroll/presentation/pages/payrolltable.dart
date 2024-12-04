@@ -1,9 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../employe/presentation/bloc/employe_bloc.dart';
 
-class PayrollTable extends StatelessWidget {
+class PayrollTable extends StatefulWidget {
+  const PayrollTable({super.key});
+  @override
+  State<PayrollTable> createState() => _PayrollTableState();
+}
+
+class _PayrollTableState extends State<PayrollTable> {
+  @override
+  void initState() {
+    super.initState();
+    getEmployees();
+  }
+
+  Future<void> getEmployees() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    String companyId = sharedPreferences.getString('companyId') ?? '';
+    BlocProvider.of<EmployeBloc>(context).add(EmployeGetEmployees(companyId));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,6 +83,9 @@ class PayrollTable extends StatelessWidget {
                     SnackBar(content: Text('Failed to get employees')),
                   );
                 }
+                if (state is EmployeGetEmployeesSuccess) {
+                  print('Employees fetched successfully');
+                }
               },
               builder: (context, state) {
                 if (state is EmployeGetEmployeesSuccess) {
@@ -87,11 +109,16 @@ class PayrollTable extends StatelessWidget {
                           index % 2 == 1
                               ? Colors.grey.shade200
                               : Colors.transparent,
+                          state.employees[index].grossSalary! -
+                              (state.employees[index].grossSalary! * .1) -
+                              ((state.employees[index].grossSalary! -
+                                      state.employees[index].grossSalary! *
+                                          .1) *
+                                  .2),
+                          state.employees[index].taxableEarnings ?? "",
                           state.employees[index].grossSalary ?? 0,
-                          state.employees[index].grossSalary ?? 0,
-                          state.employees[index].grossSalary ?? 0,
-                          state.employees[index].grossSalary ?? 0,
-                          state.employees[index].grossSalary ?? 0,
+                          state.employees[index].grossSalary! * 0.1,
+                          state.employees[index].grossSalary!,
                           state.employees[index].employeeName ?? '',
                         ),
                       ),
@@ -107,17 +134,24 @@ class PayrollTable extends StatelessWidget {
     );
   }
 
-  DataRow buildRow(Color color, int netSalary, int taxableEarnings,
-      int incomeTax, int pensionTax, int grossPay, String employees) {
+  DataRow buildRow(Color color, double netSalary, String taxableEarnings,
+      int incomeTax, double pensionTax, int grossPay, String employees) {
     return DataRow(
       cells: [
         buildCell(employees, columnIndex: 0),
-        buildCell(netSalary.toString(), columnIndex: 1),
+        buildCell(netSalary.toStringAsFixed(2), columnIndex: 1),
         buildCell(taxableEarnings.toString(), columnIndex: 2),
         buildCell(incomeTax.toString(), columnIndex: 3),
-        buildCell(pensionTax.toString(), columnIndex: 4),
+        buildCell(pensionTax.toStringAsFixed(2), columnIndex: 4),
         buildCell(grossPay.toString(), columnIndex: 5),
         DataCell(ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Color(0xFF16C098),
+            foregroundColor: Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(5),
+            ),
+          ),
           onPressed: () {
             print('Pay button clicked for $grossPay');
           },

@@ -1,5 +1,11 @@
 import 'package:demoz/features/auth/presentation/widgets/textfiled.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:uuid/uuid.dart';
+
+import '../../data/models/employee.dart';
+import '../bloc/employe_bloc.dart';
 
 class EmployeeScreen extends StatefulWidget {
   const EmployeeScreen({super.key});
@@ -177,11 +183,18 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
                     ],
                   )),
               SizedBox(height: 20),
-              Container(
-                  width: double.infinity,
-                  height: 60,
-                  margin: EdgeInsets.symmetric(horizontal: 20),
-                  child: ElevatedButton(
+              BlocConsumer<EmployeBloc, EmployeState>(
+                listener: (context, state) {
+                  if (state is EmployeCreateEmployeeSuccess) {
+                    Navigator.pop(context);
+                  }
+                },
+                builder: (context, state) {
+                  return Container(
+                    width: double.infinity,
+                    height: 60,
+                    margin: EdgeInsets.symmetric(horizontal: 20),
+                    child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         elevation: 0,
                         backgroundColor: isAllFieldValid()
@@ -190,10 +203,42 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10)),
                       ),
-                      onPressed: isAllFieldValid() ? () {} : null,
-                      child: Text("Add Employee",
-                          style: TextStyle(color: Colors.white)))),
-              SizedBox(height: 40),
+                      onPressed: isAllFieldValid()
+                          ? () async {
+                              SharedPreferences sharedPreferences =
+                                  await SharedPreferences.getInstance();
+                              String companyId =
+                                  sharedPreferences.getString('companyId') ??
+                                      '';
+                              context
+                                  .read<EmployeBloc>()
+                                  .add(EmployeCreateEmployee(Employee(
+                                    employeeName: employeeNameController.text,
+                                    email: emailController.text,
+                                    phoneNumber: phoneNumberController.text,
+                                    tinNumber: tinNumberController.text,
+                                    grossSalary: int.parse(
+                                        grossSalaryController.text ?? "0"),
+                                    taxableEarnings:
+                                        taxableEarningsController.text ?? "0",
+                                    startDate:
+                                        startingDateOfSalaryController.text,
+                                    password: '',
+                                    empoyeeId: Uuid().v4(),
+                                    companyId: companyId,
+                                  )));
+                            }
+                          : null,
+                      child: Text(
+                        state is EmployeCreateEmployeeLoading
+                            ? "Adding..."
+                            : "Add Employee",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  );
+                },
+              ),
             ],
           ),
         ));
