@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../widgets/category.dart';
 import '../widgets/domoz_card.dart';
@@ -18,6 +19,14 @@ class _HomePageState extends State<HomePage> {
   void changeActiveButton() {
     setState(() {
       activeButton = !activeButton;
+    });
+  }
+
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
     });
   }
 
@@ -121,6 +130,84 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
         ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
+        backgroundColor: Colors.white,
+        elevation: 8.0,
+        items: [
+          BottomNavigationBarItem(
+            icon: Column(
+              children: [
+                if (_selectedIndex == 0)
+                  Container(
+                    height: 4.0,
+                    width: 20.0,
+                    color: Colors.blue,
+                  ),
+                const SizedBox(height: 10),
+                SvgPicture.asset(
+                  "assets/icons/home.svg",
+                  width: 20,
+                  height: 20,
+                  colorFilter: ColorFilter.mode(
+                    _selectedIndex == 0 ? Colors.blue : Colors.black,
+                    BlendMode.srcIn,
+                  ),
+                ),
+              ],
+            ),
+            label: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Column(
+              children: [
+                if (_selectedIndex == 1)
+                  Container(
+                    height: 4.0,
+                    width: 20.0,
+                    color: Colors.blue,
+                  ),
+                const SizedBox(height: 10),
+                SvgPicture.asset(
+                  "assets/icons/note.svg",
+                  width: 20,
+                  height: 20,
+                  colorFilter: ColorFilter.mode(
+                    _selectedIndex == 1 ? Colors.blue : Colors.black,
+                    BlendMode.srcIn,
+                  ),
+                ),
+              ],
+            ),
+            label: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Column(
+              children: [
+                if (_selectedIndex == 2)
+                  Container(
+                    height: 4.0,
+                    width: 20.0,
+                    color: Colors.blue,
+                  ),
+                const SizedBox(height: 10),
+                SvgPicture.asset(
+                  "assets/icons/profile.svg",
+                  width: 20,
+                  height: 20,
+                  colorFilter: ColorFilter.mode(
+                    _selectedIndex == 2 ? Colors.blue : Colors.black,
+                    BlendMode.srcIn,
+                  ),
+                ),
+              ],
+            ),
+            label: '',
+          ),
+        ],
+        type: BottomNavigationBarType.fixed,
       ),
     );
   }
