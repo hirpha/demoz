@@ -4,16 +4,27 @@ import 'package:demoz/onboarding.dart';
 import 'package:demoz/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 import 'features/auth/data/datasources/auth_data_source.dart';
 import 'features/auth/data/datasources/auth_imp_api.dart';
+import 'features/auth/data/models/company.dart';
 import 'features/auth/data/repositories/auth_repo.dart';
 import 'features/auth/presentation/bloc/auth_bloc.dart';
+import 'features/employe/data/models/employee.dart';
 import 'features/employe/presentation/pages/employee.dart';
 import 'features/payroll/presentation/pages/calendar.dart';
 import 'features/home/presentation/pages/home.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize Hive
+  await Hive.initFlutter();
+
+  // Register the adapter for your model (ensure this matches your model class)
+  Hive.registerAdapter(CompanyAdapter());
+  Hive.registerAdapter(EmployeeAdapter());
   runApp(const MyApp());
 }
 

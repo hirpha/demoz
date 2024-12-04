@@ -20,3 +20,12 @@ class AuthRegisterLoading extends AuthState {}
 class AuthRegisterSuccess extends AuthState {}
 
 class AuthRegisterFailure extends AuthState {}
+
+class AuthGetCompanyLoading extends AuthState {}
+
+class AuthGetCompanySuccess extends AuthState {
+  final Company company;
+  const AuthGetCompanySuccess({required this.company});
+}
+
+class AuthGetCompanyFailure extends AuthState {}

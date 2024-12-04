@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:uuid/uuid.dart';
 
+import '../../data/models/company.dart';
+import '../bloc/auth_bloc.dart';
 import '../widgets/textfiled.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -159,32 +163,59 @@ class _RegisterPageState extends State<RegisterPage> {
                 },
               ),
               const SizedBox(height: 20),
-              Container(
-                width: double.infinity,
-                height: 60,
-                margin: const EdgeInsets.symmetric(horizontal: 20),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: !isAllFieldValid()
-                        ? const Color.fromARGB(255, 218, 218, 218)
-                        : const Color(0xFF3085FE),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
+              BlocConsumer<AuthBloc, AuthState>(
+                listener: (context, state) {
+                  if (state is AuthRegisterSuccess) {
+                    Navigator.pushNamed(context, '/home');
+                  }
+                },
+                builder: (context, state) {
+                  return Container(
+                    width: double.infinity,
+                    height: 60,
+                    margin: const EdgeInsets.symmetric(horizontal: 20),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: !isAllFieldValid()
+                            ? const Color.fromARGB(255, 218, 218, 218)
+                            : const Color(0xFF3085FE),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                      ),
+                      onPressed: !isAllFieldValid()
+                          ? null
+                          : () {
+                              Company company = Company(
+                                companyId: Uuid().v4(),
+                                companyName: companyNameController.text,
+                                companyAddress: addressController.text,
+                                email: widget.email,
+                                password: widget.password,
+                                tinNumber: tinNumberController.text,
+                                numberOfEmployees:
+                                    int.parse(numberOfEmployeesController.text),
+                                companyBank: companyBankController.text,
+                                bankAccountNumber:
+                                    bankAccountNumberController.text,
+                              );
+                              context
+                                  .read<AuthBloc>()
+                                  .add(AuthRegisterEvent(company: company));
+                            },
+                      child: Text(
+                          state is AuthRegisterLoading
+                              ? 'Loading...'
+                              : 'Submit Proposal',
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
+                              color: !isAllFieldValid()
+                                  ? Colors.black
+                                  : const Color.fromARGB(255, 255, 255, 255))),
                     ),
-                  ),
-                  onPressed: !isAllFieldValid()
-                      ? null
-                      : () {
-                          Navigator.pushNamed(context, '/home');
-                        },
-                  child: Text('Submit Proposal',
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
-                          color: !isAllFieldValid()
-                              ? Colors.black
-                              : const Color.fromARGB(255, 255, 255, 255))),
-                ),
+                  );
+                },
               ),
             ],
           ),

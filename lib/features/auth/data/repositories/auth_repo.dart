@@ -13,4 +13,8 @@ class AuthRepository {
   Future<bool> register(Company company) async {
     return await dataSource.register(company);
   }
+
+  Future<Company> getCompany(String companyId) async {
+    return await dataSource.getCompany(companyId);
+  }
 }

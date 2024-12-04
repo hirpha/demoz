@@ -14,5 +14,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       await authRepository.register(event.company);
       emit(AuthRegisterSuccess());
     });
+    on<AuthGetCompanyEvent>((event, emit) async {
+      emit(AuthGetCompanyLoading());
+      final company = await authRepository.getCompany(event.companyId);
+      emit(AuthGetCompanySuccess(company: company));
+    });
   }
 }

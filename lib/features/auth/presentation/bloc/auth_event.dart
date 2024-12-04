@@ -17,3 +17,8 @@ class AuthRegisterEvent extends AuthEvent {
   final Company company;
   const AuthRegisterEvent({required this.company});
 }
+
+class AuthGetCompanyEvent extends AuthEvent {
+  final String companyId;
+  const AuthGetCompanyEvent({required this.companyId});
+}

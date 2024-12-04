@@ -8,30 +8,34 @@ class Company extends HiveObject {
   String? email;
 
   @HiveField(1)
-  String? password;
+  String? companyId;
 
   @HiveField(2)
-  String? companyName;
+  String? password;
 
   @HiveField(3)
-  String? companyAddress;
+  String? companyName;
 
   @HiveField(4)
-  String? phoneNumber;
+  String? companyAddress;
 
   @HiveField(5)
-  String? tinNumber;
+  String? phoneNumber;
 
   @HiveField(6)
-  int? numberOfEmployees;
+  String? tinNumber;
 
   @HiveField(7)
-  String? companyBank;
+  int? numberOfEmployees;
 
   @HiveField(8)
+  String? companyBank;
+
+  @HiveField(9)
   String? bankAccountNumber;
 
   Company({
+    this.companyId,
     this.email,
     this.password,
     this.companyName,
