@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../widgets/textfiled.dart';
+import 'register.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
@@ -73,48 +74,51 @@ class _SignInPageState extends State<SignInPage> {
               controller: emailController,
             ),
             const SizedBox(height: 20),
-            TextFieldWidget(
-              hintText: 'Password',
-              controller: passwordController,
-            ),
-            const SizedBox(height: 20),
             Container(
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                  Row(children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            'Password',
-                            style: TextStyle(
+              margin: const EdgeInsets.symmetric(horizontal: 20),
+              alignment: Alignment.centerLeft,
+              height: 60,
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(15),
+                border: Border.all(color: const Color(0xFFADADAD)),
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Password',
+                          style:
+                              TextStyle(color: Color(0xFFACAFB5), fontSize: 14),
+                        ),
+                        TextField(
+                          decoration: InputDecoration.collapsed(
+                            hintText: '',
+                            hintStyle: TextStyle(
                                 color: Color(0xFFACAFB5), fontSize: 14),
                           ),
-                          TextField(
-                            obscureText: _obscureText,
-                            decoration: InputDecoration.collapsed(
-                              hintText: '',
-                              hintStyle: const TextStyle(
-                                  color: Color(0xFFACAFB5), fontSize: 14),
-                            ),
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                    IconButton(
-                      icon: Icon(
-                        _obscureText ? Icons.visibility : Icons.visibility_off,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          _obscureText = !_obscureText;
-                        });
-                      },
+                  ),
+                  IconButton(
+                    icon: Icon(
+                      _obscureText ? Icons.visibility : Icons.visibility_off,
                     ),
-                  ]),
-                ])),
+                    onPressed: () {
+                      setState(() {
+                        _obscureText = !_obscureText;
+                      });
+                    },
+                  ),
+                ],
+              ),
+            ),
             const SizedBox(height: 20),
             Container(
               height: 60,
@@ -172,12 +176,14 @@ class _SignInPageState extends State<SignInPage> {
                   TextButton(
                     style: TextButton.styleFrom(
                       padding: EdgeInsets.zero,
-                      textStyle: TextStyle(
+                      textStyle: const TextStyle(
                         color: Color(0xFF3085FE),
                         fontSize: 14,
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/register');
+                    },
                     child: const Text(
                       'Sign Up',
                       style: TextStyle(fontSize: 14, color: Color(0xFF3085FE)),
