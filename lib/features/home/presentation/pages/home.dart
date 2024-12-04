@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/category.dart';
 import '../widgets/domoz_card.dart';
 
 class HomePage extends StatefulWidget {
@@ -32,25 +33,52 @@ class _HomePageState extends State<HomePage> {
       body: Column(
         children: [
           Container(
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 DomozCard(
-                    title: 'title',
-                    amount: 'description',
+                    title: 'Number of Employees',
+                    amount: '2',
                     onTap: () {},
                     borderColor: Colors.grey,
-                    backgroundColor: Colors.white),
+                    backgroundColor: const Color(0xFF3085FE)),
                 const SizedBox(width: 10),
                 DomozCard(
-                    title: 'title',
-                    amount: 'description',
+                    title: 'Income Tax paid',
+                    amount: '2000',
                     onTap: () {},
                     borderColor: Colors.grey,
-                    backgroundColor: Colors.white),
+                    backgroundColor: const Color(0xFFA3D139)),
               ],
             ),
+          ),
+          const SizedBox(height: 10),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                DomozCard(
+                    title: 'Pension Tax paid',
+                    amount: '2000',
+                    onTap: () {},
+                    borderColor: Colors.grey,
+                    backgroundColor: const Color(0xFF30BEB6)),
+                const SizedBox(width: 10),
+                DomozCard(
+                    title: 'Employees Performance',
+                    amount: '95%',
+                    onTap: () {},
+                    borderColor: Colors.grey,
+                    backgroundColor: const Color(0xFFFF7F74)),
+              ],
+            ),
+          ),
+          const SizedBox(height: 10),
+          Category(
+            onPressed: () {},
+            activeButton: true,
           ),
         ],
       ),

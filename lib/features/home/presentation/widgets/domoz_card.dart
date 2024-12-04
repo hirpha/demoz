@@ -25,13 +25,13 @@ class _DomozCardState extends State<DomozCard> {
     return InkWell(
         onTap: widget.onTap,
         child: Container(
-          width: MediaQuery.of(context).size.width / 2 - 20,
+          width: MediaQuery.of(context).size.width / 2 - 30,
           height: 100,
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
-            color: widget.backgroundColor,
+            color: widget.backgroundColor.withOpacity(0.05),
             borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: widget.borderColor),
+            border: Border.all(color: widget.backgroundColor),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -39,11 +39,17 @@ class _DomozCardState extends State<DomozCard> {
             children: [
               Text(
                 widget.title,
-                style: const TextStyle(color: Color(0xFF101317)),
+                style: const TextStyle(
+                    color: Color(0xFF101317),
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold),
               ),
               Text(
                 widget.amount,
-                style: const TextStyle(color: Color(0xFF101317)),
+                style: TextStyle(
+                    color: widget.backgroundColor,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold),
               ),
             ],
           ),
