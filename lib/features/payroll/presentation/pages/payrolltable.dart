@@ -85,6 +85,7 @@ class _PayrollTableState extends State<PayrollTable> {
                 }
                 if (state is EmployeGetEmployeesSuccess) {
                   print('Employees fetched successfully');
+                  print(state.employees.length);
                 }
               },
               builder: (context, state) {

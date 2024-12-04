@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../bloc/auth_bloc.dart';
 import '../widgets/textfiled.dart';
-import 'register.dart';
 
 class SignInPage extends StatefulWidget {
   String login;

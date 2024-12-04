@@ -1,12 +1,8 @@
 import 'package:demoz/features/employe/data/datasources/employee_data_source.dart';
-import 'package:hive/hive.dart';
+import '../../../../main.dart';
 import '../models/employee.dart';
 
 class EmployeeImpApi extends EmployeeDataSource {
-  final Box<Employee> employeeBox;
-
-  EmployeeImpApi(this.employeeBox);
-
   @override
   Future<List<Employee>> getEmployees(String companyId) async {
     try {

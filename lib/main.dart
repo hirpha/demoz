@@ -13,6 +13,7 @@ import 'features/auth/data/models/company.dart';
 import 'features/auth/data/repositories/auth_repo.dart';
 import 'features/auth/presentation/bloc/auth_bloc.dart';
 import 'features/employe/data/datasources/employee_data_source.dart';
+import 'features/employe/data/datasources/employee_imp_api.dart';
 import 'features/employe/data/models/employee.dart';
 import 'features/employe/data/repositories/employe_repo.dart';
 import 'features/employe/presentation/pages/employee.dart';
@@ -20,6 +21,7 @@ import 'features/payroll/presentation/pages/calendar.dart';
 import 'features/home/presentation/pages/home.dart';
 
 late Box<Company> companyBox;
+late Box<Employee> employeeBox;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -30,6 +32,7 @@ void main() async {
   Hive.registerAdapter(CompanyAdapter());
   Hive.registerAdapter(EmployeeAdapter());
   companyBox = await Hive.openBox<Company>('companyBox');
+  employeeBox = await Hive.openBox<Employee>('employee');
   runApp(const MyApp());
 }
 
@@ -47,6 +50,9 @@ class MyApp extends StatelessWidget {
           RepositoryProvider<AuthRepository>(
             create: (context) =>
                 AuthRepository(dataSource: context.read<AuthDataSource>()),
+          ),
+          RepositoryProvider<EmployeeDataSource>(
+            create: (context) => EmployeeImpApi(),
           ),
           RepositoryProvider<EmployeRepo>(
               create: (context) => EmployeRepo(
