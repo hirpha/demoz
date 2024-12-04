@@ -23,9 +23,8 @@ class Category extends StatelessWidget {
             child: ElevatedButton(
                 onPressed: onPressed,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: activeButton
-                      ? const Color.fromARGB(255, 18, 76, 212)
-                      : Colors.white,
+                  backgroundColor:
+                      activeButton ? const Color(0xFF3085FE) : Colors.white,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10)),
                 ),
@@ -40,9 +39,8 @@ class Category extends StatelessWidget {
             child: ElevatedButton(
                 onPressed: onPressed,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: !activeButton
-                      ? const Color.fromARGB(255, 18, 76, 212)
-                      : Colors.grey,
+                  backgroundColor:
+                      !activeButton ? const Color(0xFF3085FE) : null,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10)),
                 ),

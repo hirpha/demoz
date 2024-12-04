@@ -10,6 +10,16 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  final TextEditingController companyNameController = TextEditingController();
+  final TextEditingController addressController = TextEditingController();
+  final TextEditingController phoneNumberController = TextEditingController();
+  final TextEditingController tinNumberController = TextEditingController();
+  final TextEditingController numberOfEmployeesController =
+      TextEditingController();
+  final TextEditingController companyBankController = TextEditingController();
+  final TextEditingController bankAccountNumberController =
+      TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,32 +78,37 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               const SizedBox(height: 20),
               TextFieldWidget(
-                controller: TextEditingController(),
+                controller: companyNameController,
                 hintText: 'Company Name',
               ),
               const SizedBox(height: 20),
               TextFieldWidget(
-                controller: TextEditingController(),
+                controller: addressController,
                 hintText: 'Address of the company',
               ),
               const SizedBox(height: 20),
               TextFieldWidget(
-                controller: TextEditingController(),
+                controller: phoneNumberController,
                 hintText: 'Phone Number',
               ),
               const SizedBox(height: 20),
               TextFieldWidget(
-                controller: TextEditingController(),
+                controller: tinNumberController,
+                hintText: 'TIN Number',
+              ),
+              const SizedBox(height: 20),
+              TextFieldWidget(
+                controller: numberOfEmployeesController,
                 hintText: 'Number of Employees',
               ),
               const SizedBox(height: 20),
               TextFieldWidget(
-                controller: TextEditingController(),
+                controller: companyBankController,
                 hintText: 'Company Bank',
               ),
               const SizedBox(height: 20),
               TextFieldWidget(
-                controller: TextEditingController(),
+                controller: bankAccountNumberController,
                 hintText: 'Bank Account Number',
               ),
               const SizedBox(height: 20),
