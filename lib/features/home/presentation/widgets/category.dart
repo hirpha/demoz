@@ -9,22 +9,24 @@ class Category extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 70,
+      height: 53,
       margin: const EdgeInsets.symmetric(horizontal: 20),
       decoration: BoxDecoration(
-        color: const Color.fromARGB(255, 232, 232, 232),
+        color: const Color.fromARGB(255, 250, 250, 250),
         borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           SizedBox(
-            height: 70,
+            height: 55,
             child: ElevatedButton(
                 onPressed: onPressed,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor:
-                      activeButton ? const Color(0xFF3085FE) : Colors.white,
+                  elevation: 0,
+                  backgroundColor: activeButton
+                      ? const Color(0xFF3085FE)
+                      : Colors.transparent,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10)),
                 ),
@@ -39,12 +41,17 @@ class Category extends StatelessWidget {
             child: ElevatedButton(
                 onPressed: onPressed,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor:
-                      !activeButton ? const Color(0xFF3085FE) : null,
+                  elevation: 0,
+                  backgroundColor: !activeButton
+                      ? const Color(0xFF3085FE)
+                      : Colors.transparent,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10)),
                 ),
-                child: const Text('Past')),
+                child: Text('Past',
+                    style: TextStyle(
+                        color: !activeButton ? Colors.white : Colors.black,
+                        fontWeight: FontWeight.bold))),
           ),
         ],
       ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../widgets/category.dart';
 import '../widgets/domoz_card.dart';
+import '../widgets/tax_item.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -11,10 +12,17 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  bool activeButton = true;
+  void changeActiveButton() {
+    setState(() {
+      activeButton = !activeButton;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+      backgroundColor: const Color.fromARGB(255, 247, 247, 247),
       appBar: AppBar(
         centerTitle: false,
         leading: SizedBox(),
@@ -77,9 +85,11 @@ class _HomePageState extends State<HomePage> {
           ),
           const SizedBox(height: 10),
           Category(
-            onPressed: () {},
-            activeButton: true,
+            onPressed: changeActiveButton,
+            activeButton: activeButton,
           ),
+          const SizedBox(height: 10),
+          const TaxItem(),
         ],
       ),
     );
