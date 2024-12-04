@@ -1,6 +1,5 @@
 import 'package:demoz/features/auth/presentation/pages/register.dart';
 import 'package:demoz/features/auth/presentation/pages/signin.dart';
-import 'package:demoz/features/employe/data/datasources/employee_imp_api.dart';
 import 'package:demoz/features/employe/presentation/bloc/employe_bloc.dart';
 import 'package:demoz/onboarding.dart';
 import 'package:demoz/splash.dart';
@@ -13,7 +12,9 @@ import 'features/auth/data/datasources/auth_imp_api.dart';
 import 'features/auth/data/models/company.dart';
 import 'features/auth/data/repositories/auth_repo.dart';
 import 'features/auth/presentation/bloc/auth_bloc.dart';
+import 'features/employe/data/datasources/employee_data_source.dart';
 import 'features/employe/data/models/employee.dart';
+import 'features/employe/data/repositories/employe_repo.dart';
 import 'features/employe/presentation/pages/employee.dart';
 import 'features/payroll/presentation/pages/calendar.dart';
 import 'features/home/presentation/pages/home.dart';
@@ -47,9 +48,9 @@ class MyApp extends StatelessWidget {
             create: (context) =>
                 AuthRepository(dataSource: context.read<AuthDataSource>()),
           ),
-          RepositoryProvider<EmployeeImpApi>(
-            create: (context) => EmployeeImpApi(),
-          ),
+          RepositoryProvider<EmployeRepo>(
+              create: (context) => EmployeRepo(
+                  employeeDataSource: context.read<EmployeeDataSource>())),
         ],
         child: MultiBlocProvider(
           providers: [
@@ -59,7 +60,7 @@ class MyApp extends StatelessWidget {
             ),
             BlocProvider<EmployeBloc>(
               create: (context) =>
-                  EmployeBloc(employeeImpApi: context.read<EmployeeImpApi>()),
+                  EmployeBloc(employeRepo: context.read<EmployeRepo>()),
             ),
           ],
           child: MaterialApp(
