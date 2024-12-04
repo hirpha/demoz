@@ -168,6 +168,49 @@ class _SignInPageState extends State<SignInPage> {
                 style: TextStyle(color: Color(0xFFACAFB5), fontSize: 14),
               ),
             ),
+            const SizedBox(height: 20),
+            Container(
+              height: 60,
+              width: double.infinity,
+              alignment: Alignment.center,
+              margin: const EdgeInsets.symmetric(horizontal: 20),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                border: Border.all(color: const Color(0xFFADADAD)),
+              ),
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image(image: AssetImage('assets/images/google.png')),
+                  SizedBox(width: 10),
+                  Text('Google'),
+                ],
+              ),
+            ),
+            const SizedBox(height: 20),
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text('Don\'t have an account?'),
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      padding: EdgeInsets.zero,
+                      textStyle: TextStyle(
+                        color: Color(0xFF3085FE),
+                        fontSize: 14,
+                      ),
+                    ),
+                    onPressed: () {},
+                    child: const Text(
+                      'Sign Up',
+                      style: TextStyle(fontSize: 14, color: Color(0xFF3085FE)),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
