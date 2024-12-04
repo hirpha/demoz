@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../bloc/auth_bloc.dart';
 import '../widgets/textfiled.dart';
 import 'register.dart';
 
 class SignInPage extends StatefulWidget {
-  const SignInPage({super.key});
+  String login;
+  SignInPage({super.key, required this.login});
 
   @override
   State<SignInPage> createState() => _SignInPageState();
@@ -142,38 +145,61 @@ class _SignInPageState extends State<SignInPage> {
               ),
             ),
             const SizedBox(height: 20),
-            Container(
-              height: 60,
-              width: double.infinity,
-              margin: const EdgeInsets.symmetric(horizontal: 20),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  elevation: 0,
-                  fixedSize: const Size(double.infinity, 6),
-                  backgroundColor: !isAllFieldValid()
-                      ? const Color.fromARGB(255, 255, 255, 255)
-                      : const Color(0xFF3085FE),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
+            BlocConsumer<AuthBloc, AuthState>(listener: (context, state) {
+              if (state is AuthSuccess) {
+                Navigator.pushNamed(context, '/home');
+              }
+              if (state is AuthFailure) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Invalid email or password')));
+              }
+            }, builder: (context, state) {
+              return Container(
+                height: 60,
+                width: double.infinity,
+                margin: const EdgeInsets.symmetric(horizontal: 20),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    elevation: 0,
+                    fixedSize: const Size(double.infinity, 6),
+                    backgroundColor: !isAllFieldValid()
+                        ? const Color.fromARGB(255, 255, 255, 255)
+                        : const Color(0xFF3085FE),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
                   ),
+                  onPressed: !isAllFieldValid()
+                      ? null
+                      : () {
+                          if (widget.login == 'signup') {
+                            Navigator.pushNamed(context, '/register',
+                                arguments: {
+                                  'email': emailController.text,
+                                  'password': passwordController.text,
+                                });
+                          } else {
+                            context.read<AuthBloc>().add(AuthSignInEvent(
+                                  email: emailController.text,
+                                  password: passwordController.text,
+                                ));
+                          }
+                        },
+                  child: Text(
+                      state is AuthLoading
+                          ? 'Loading...'
+                          : widget.login == 'signup'
+                              ? 'Sign Up'
+                              : 'Sign In',
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                          color: isAllFieldValid()
+                              ? Color.fromARGB(255, 255, 255, 255)
+                              : Colors.black)),
                 ),
-                onPressed: !isAllFieldValid()
-                    ? null
-                    : () {
-                        Navigator.pushNamed(context, '/register', arguments: {
-                          'email': emailController.text,
-                          'password': passwordController.text,
-                        });
-                      },
-                child: Text('Sign In',
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                        color: isAllFieldValid()
-                            ? Color.fromARGB(255, 255, 255, 255)
-                            : Colors.black)),
-              ),
-            ),
+              );
+            }),
             const SizedBox(height: 20),
             Container(
               width: double.infinity,
@@ -219,7 +245,13 @@ class _SignInPageState extends State<SignInPage> {
                       ),
                     ),
                     onPressed: () {
-                      Navigator.pushNamed(context, '/register');
+                      setState(() {
+                        if (widget.login == 'signup') {
+                          widget.login = 'signin';
+                        } else {
+                          widget.login = 'signup';
+                        }
+                      });
                     },
                     child: const Text(
                       'Sign Up',

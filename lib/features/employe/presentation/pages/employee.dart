@@ -186,6 +186,12 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
               BlocConsumer<EmployeBloc, EmployeState>(
                 listener: (context, state) {
                   if (state is EmployeCreateEmployeeSuccess) {
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text('Employee added'),
+                        backgroundColor: Color.fromARGB(255, 48, 254, 89)));
+                    context
+                        .read<EmployeBloc>()
+                        .add(EmployeGetEmployees(state.employee.companyId!));
                     Navigator.pop(context);
                   }
                 },
@@ -217,7 +223,7 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
                                     email: emailController.text,
                                     phoneNumber: phoneNumberController.text,
                                     tinNumber: tinNumberController.text,
-                                    grossSalary: int.parse(
+                                    grossSalary: double.parse(
                                         grossSalaryController.text ?? "0"),
                                     taxableEarnings:
                                         taxableEarningsController.text ?? "0",

@@ -13,7 +13,10 @@ class AuthLoading extends AuthState {}
 
 class AuthSuccess extends AuthState {}
 
-class AuthFailure extends AuthState {}
+class AuthFailure extends AuthState {
+  final String message;
+  const AuthFailure({required this.message});
+}
 
 class AuthRegisterLoading extends AuthState {}
 
@@ -28,4 +31,7 @@ class AuthGetCompanySuccess extends AuthState {
   const AuthGetCompanySuccess({required this.company});
 }
 
-class AuthGetCompanyFailure extends AuthState {}
+class AuthGetCompanyFailure extends AuthState {
+  final String message;
+  const AuthGetCompanyFailure({required this.message});
+}

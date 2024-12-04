@@ -109,16 +109,11 @@ class _PayrollTableState extends State<PayrollTable> {
                           index % 2 == 1
                               ? Colors.grey.shade200
                               : Colors.transparent,
-                          state.employees[index].grossSalary! -
-                              (state.employees[index].grossSalary! * .1) -
-                              ((state.employees[index].grossSalary! -
-                                      state.employees[index].grossSalary! *
-                                          .1) *
-                                  .2),
+                          (state.employees[index].grossSalary ?? 0).toDouble() * 0.7,
                           state.employees[index].taxableEarnings ?? "",
-                          state.employees[index].grossSalary ?? 0,
-                          state.employees[index].grossSalary! * 0.1,
-                          state.employees[index].grossSalary!,
+                          (state.employees[index].grossSalary ?? 0).toDouble() * 0.2,
+                          (state.employees[index].grossSalary ?? 0).toDouble() * 0.1,
+                          (state.employees[index].grossSalary ?? 0).toDouble(),
                           state.employees[index].employeeName ?? '',
                         ),
                       ),
@@ -135,7 +130,7 @@ class _PayrollTableState extends State<PayrollTable> {
   }
 
   DataRow buildRow(Color color, double netSalary, String taxableEarnings,
-      int incomeTax, double pensionTax, int grossPay, String employees) {
+      double incomeTax, double pensionTax, double grossPay, String employees) {
     return DataRow(
       cells: [
         buildCell(employees, columnIndex: 0),
@@ -163,12 +158,15 @@ class _PayrollTableState extends State<PayrollTable> {
 
   DataCell buildCell(String value, {required int columnIndex}) {
     bool isEvenColumn = columnIndex % 2 == 0;
+    String displayValue = columnIndex == 0 ? value : 
+        double.tryParse(value)?.toStringAsFixed(2) ?? value;
+    
     return DataCell(Container(
       width: double.infinity,
       color: isEvenColumn ? Colors.blue.shade50 : Colors.transparent,
       padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
       child: Text(
-        value.toString(),
+        displayValue,
         style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
       ),
     ));

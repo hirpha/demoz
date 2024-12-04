@@ -18,6 +18,7 @@ import 'features/employe/presentation/pages/employee.dart';
 import 'features/payroll/presentation/pages/calendar.dart';
 import 'features/home/presentation/pages/home.dart';
 
+late Box<Company> companyBox;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -27,6 +28,7 @@ void main() async {
   // Register the adapter for your model (ensure this matches your model class)
   Hive.registerAdapter(CompanyAdapter());
   Hive.registerAdapter(EmployeeAdapter());
+  companyBox = await Hive.openBox<Company>('companyBox');
   runApp(const MyApp());
 }
 
@@ -76,8 +78,11 @@ class MyApp extends StatelessWidget {
                     return MaterialPageRoute(
                         builder: (context) => const OnboardingScreen());
                   case '/signin':
+                    final args = settings.arguments as String;
                     return MaterialPageRoute(
-                        builder: (context) => const SignInPage());
+                        builder: (context) => SignInPage(
+                              login: args,
+                            ));
                   case '/register':
                     final args = settings.arguments as Map<String, String>;
                     return MaterialPageRoute(

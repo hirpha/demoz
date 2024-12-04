@@ -10,14 +10,31 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthRepository authRepository;
   AuthBloc({required this.authRepository}) : super(AuthInitial()) {
     on<AuthRegisterEvent>((event, emit) async {
-      emit(AuthRegisterLoading());
-      await authRepository.register(event.company);
-      emit(AuthRegisterSuccess());
+      try {
+        emit(AuthRegisterLoading());
+        await authRepository.register(event.company);
+        emit(AuthRegisterSuccess());
+      } catch (e) {
+        emit(AuthFailure(message: e.toString()));
+      }
     });
     on<AuthGetCompanyEvent>((event, emit) async {
-      emit(AuthGetCompanyLoading());
-      final company = await authRepository.getCompany(event.companyId);
-      emit(AuthGetCompanySuccess(company: company));
+      try {
+        emit(AuthGetCompanyLoading());
+        final company = await authRepository.getCompany(event.companyId);
+        emit(AuthGetCompanySuccess(company: company));
+      } catch (e) {
+        emit(AuthGetCompanyFailure(message: e.toString()));
+      }
+    });
+    on<AuthSignInEvent>((event, emit) async {
+      try {
+        emit(AuthLoading());
+        await authRepository.signIn(event.email, event.password);
+        emit(AuthSuccess());
+      } catch (e) {
+        emit(AuthFailure(message: e.toString()));
+      }
     });
   }
 }

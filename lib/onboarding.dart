@@ -108,7 +108,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             ),
                           ),
                           onPressed: () {
-                            Navigator.pushNamed(context, '/signin');
+                            Navigator.pushNamed(context, '/signin',
+                                arguments: 'login');
                           },
                           child: const Text(
                             'Login',
@@ -125,7 +126,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             ),
                           ),
                           onPressed: () {
-                            Navigator.pushNamed(context, '/register');
+                            Navigator.pushNamed(context, '/signin',
+                                arguments: 'signup');
                           },
                           child: const Text(
                             'Sign Up',

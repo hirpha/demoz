@@ -7,14 +7,26 @@ class AuthRepository {
   AuthRepository({required this.dataSource});
 
   Future<void> signIn(String email, String password) async {
-    await dataSource.signIn(email, password);
+    try {
+      await dataSource.signIn(email, password);
+    } catch (e) {
+      rethrow;
+    }
   }
 
   Future<bool> register(Company company) async {
-    return await dataSource.register(company);
+    try {
+      return await dataSource.register(company);
+    } catch (e) {
+      rethrow;
+    }
   }
 
   Future<Company> getCompany(String companyId) async {
-    return await dataSource.getCompany(companyId);
+    try {
+      return await dataSource.getCompany(companyId);
+    } catch (e) {
+      rethrow;
+    }
   }
 }

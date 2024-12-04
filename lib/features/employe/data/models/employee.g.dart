@@ -24,7 +24,7 @@ class EmployeeAdapter extends TypeAdapter<Employee> {
       employeeAddress: fields[4] as String?,
       phoneNumber: fields[5] as String?,
       tinNumber: fields[6] as String?,
-      grossSalary: fields[7] as int?,
+      grossSalary: fields[7] as double?,
       taxableEarnings: fields[8] as String?,
       startDate: fields[9] as String?,
       companyId: fields[10] as String?,

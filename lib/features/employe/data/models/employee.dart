@@ -26,7 +26,7 @@ class Employee extends HiveObject {
   String? tinNumber;
 
   @HiveField(7)
-  int? grossSalary;
+  double? grossSalary;
 
   @HiveField(8)
   String? taxableEarnings;
