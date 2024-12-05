@@ -53,9 +53,9 @@ class _PayrollTableState extends State<PayrollTable> {
       backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       body: Column(
         children: [
-          SizedBox(height: MediaQuery.of(context).size.height * 0.08),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.05),
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -116,70 +116,76 @@ class _PayrollTableState extends State<PayrollTable> {
           SizedBox(),
           Expanded(
             child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: BlocConsumer<EmployeBloc, EmployeState>(
-                listener: (context, state) {
-                  print('state: $state');
-                  if (state is EmployeGetEmployeesFailure) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text(state.message)),
-                    );
-                  }
-                },
-                builder: (context, state) {
-                  if (state is EmployeGetEmployeesLoading) {
-                    print('loading');
-                    return Container(
-                      height: MediaQuery.of(context).size.height * 0.8,
-                      width: MediaQuery.of(context).size.width,
-                      child: Center(
-                        child: CircularProgressIndicator(
-                          color: Color(0xFF16C098),
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: BlocConsumer<EmployeBloc, EmployeState>(
+                  listener: (context, state) {
+                    print('state: $state');
+                    if (state is EmployeGetEmployeesFailure) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text(state.message)),
+                      );
+                    }
+                  },
+                  builder: (context, state) {
+                    if (state is EmployeGetEmployeesLoading) {
+                      print('loading');
+                      return Container(
+                        height: MediaQuery.of(context).size.height * 0.8,
+                        width: MediaQuery.of(context).size.width,
+                        child: Center(
+                          child: CircularProgressIndicator(
+                            color: Color(0xFF16C098),
+                          ),
                         ),
-                      ),
-                    );
-                  }
-                  if (state is EmployeGetEmployeesSuccess) {
-                    return DataTable(
-                      dataRowColor: MaterialStateColor.resolveWith((states) {
-                        return Colors.transparent;
-                      }),
-                      columns: const [
-                        DataColumn(label: Text('Employees')),
-                        DataColumn(label: Text('Net Salary')),
-                        DataColumn(label: Text('Taxable Earnings')),
-                        DataColumn(label: Text('Income Tax')),
-                        DataColumn(label: Text('Pension Tax')),
-                        DataColumn(label: Text('Gross Pay')),
-                        DataColumn(label: Text('Action')),
-                      ],
-                      rows: List<DataRow>.generate(
-                        state.employees.length,
-                        (index) => buildRow(
-                          index % 2 == 1
-                              ? Colors.grey.shade200
-                              : Colors.transparent,
-                          (state.employees[index].grossSalary ?? 0).toDouble() *
-                              0.7,
-                          state.employees[index].taxableEarnings ?? "",
-                          (state.employees[index].grossSalary ?? 0).toDouble() *
-                              0.2,
-                          (state.employees[index].grossSalary ?? 0).toDouble() -
-                              (state.employees[index].grossSalary ?? 0)
-                                      .toDouble() *
-                                  0.7,
-                          (state.employees[index].grossSalary ?? 0).toDouble(),
-                          state.employees[index].employeeName ?? '',
+                      );
+                    }
+                    if (state is EmployeGetEmployeesSuccess) {
+                      return DataTable(
+                        dataRowColor: MaterialStateColor.resolveWith((states) {
+                          return Colors.transparent;
+                        }),
+                        columns: const [
+                          DataColumn(label: Text('Employees')),
+                          DataColumn(label: Text('Net Salary')),
+                          DataColumn(label: Text('Taxable Earnings')),
+                          DataColumn(label: Text('Income Tax')),
+                          DataColumn(label: Text('Pension Tax')),
+                          DataColumn(label: Text('Gross Pay')),
+                          DataColumn(label: Text('Action')),
+                        ],
+                        rows: List<DataRow>.generate(
+                          state.employees.length,
+                          (index) => buildRow(
+                            index % 2 == 1
+                                ? Colors.grey.shade200
+                                : Colors.transparent,
+                            (state.employees[index].grossSalary ?? 0)
+                                    .toDouble() *
+                                0.7,
+                            state.employees[index].taxableEarnings ?? "",
+                            (state.employees[index].grossSalary ?? 0)
+                                    .toDouble() *
+                                0.2,
+                            (state.employees[index].grossSalary ?? 0)
+                                    .toDouble() -
+                                (state.employees[index].grossSalary ?? 0)
+                                        .toDouble() *
+                                    0.7,
+                            (state.employees[index].grossSalary ?? 0)
+                                .toDouble(),
+                            state.employees[index].employeeName ?? '',
+                          ),
                         ),
-                      ),
-                    );
-                  }
+                      );
+                    }
 
-                  return const SizedBox();
-                },
+                    return const SizedBox();
+                  },
+                ),
               ),
             ),
-          ),
+          )
         ],
       ),
     );

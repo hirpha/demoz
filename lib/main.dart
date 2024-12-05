@@ -1,6 +1,7 @@
 import 'package:demoz/features/auth/presentation/pages/register.dart';
 import 'package:demoz/features/auth/presentation/pages/signin.dart';
 import 'package:demoz/features/employe/presentation/bloc/employe_bloc.dart';
+import 'package:demoz/features/home/presentation/pages/settings.dart';
 import 'package:demoz/onboarding.dart';
 import 'package:demoz/splash.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,6 @@ late Box<Employee> employeeBox;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-   
     statusBarColor: Color.fromARGB(255, 255, 255, 255),
     statusBarIconBrightness: Brightness.dark,
   ));
@@ -112,6 +112,9 @@ class MyApp extends StatelessWidget {
                   case '/employee':
                     return MaterialPageRoute(
                         builder: (context) => const EmployeeScreen());
+                  case '/settings':
+                    return MaterialPageRoute(
+                        builder: (context) => const Settings());
                   default:
                     return MaterialPageRoute(
                         builder: (context) => const SplashScreen());

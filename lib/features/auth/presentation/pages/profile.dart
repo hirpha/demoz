@@ -73,7 +73,7 @@ class _ProfileScreenState extends State<ProfileScreen>
           },
           builder: (context, state) {
             if (state is AuthGetCompanyLoading) {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(
                   color: Color(0xFF16C098),
                 ),
@@ -90,7 +90,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
+                        const Text(
                           'Company \nProfile',
                           style: TextStyle(
                               fontSize: 28, fontWeight: FontWeight.bold),
@@ -140,7 +140,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                                       MediaQuery.of(context).size.height * 0,
                                   child: Column(
                                     children: [
-                                      Text('Company Name',
+                                      const Text('Company Name',
                                           style: TextStyle(
                                               fontSize: 18,
                                               fontWeight: FontWeight.bold)),
@@ -154,7 +154,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                               ],
                             ),
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           CustomTextField(
                             initialValue: state.company.email ?? '',
                             label: 'Company Email',
@@ -163,7 +163,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                             controller: _companyEmailController,
                             readOnly: true,
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           CustomTextField(
                             initialValue: state.company.phoneNumber ?? '',
                             label: 'Company Phone',
@@ -172,7 +172,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                             controller: _companyPhoneController,
                             readOnly: true,
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           CustomTextField(
                             initialValue: state.company.companyAddress ?? '',
                             label: 'Company Address',
@@ -181,7 +181,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                             controller: _companyAddressController,
                             readOnly: true,
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           CustomTextField(
                             initialValue:
                                 state.company.numberOfEmployees.toString() ??
@@ -192,7 +192,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                             controller: _numberOfEmployeesController,
                             readOnly: true,
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           CustomTextField(
                             initialValue: state.company.tinNumber ?? '',
                             label: 'Tin Number',
@@ -201,7 +201,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                             controller: _tinNumberController,
                             readOnly: true,
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           CustomTextField(
                             initialValue: state.company.companyBank ?? '',
                             label: 'Company Bank',
@@ -210,7 +210,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                             controller: _companyBankController,
                             readOnly: true,
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           CustomTextField(
                             initialValue: state.company.bankAccountNumber ?? '',
                             label: 'Company Bank Account',

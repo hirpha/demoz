@@ -89,7 +89,9 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                 ),
                                 IconButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.pushNamed(context, '/settings');
+                                  },
                                   icon: const Icon(Icons.settings),
                                 ),
                               ],
