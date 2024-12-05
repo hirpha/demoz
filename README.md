@@ -1,16 +1,39 @@
-# demoz
+# Flutter Employee Management System
 
-A new Flutter project.
+A Flutter project for managing employees and companies using Hive for local storage. This project includes features for:
+
+- Registering and signing in companies.
+- Managing employees (create, update, delete).
+- Calculating salaries, pensions, income taxes, and more.
+- Selecting dates using a built-in date picker.
+
+---
+
+## Features
+
+- **Hive Integration**: Local storage for companies and employees.
+- **Shared Preferences**: Store simple key-value data like user sessions.
+- **Date Picker**: Select dates easily within the app.
+- **Gross Salary Calculations**: Derive net salary, pension, taxable earnings, and income tax.
+
+---
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+### Prerequisites
 
-A few resources to get you started if this is your first Flutter project:
+Ensure you have the following installed on your system:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- [Flutter SDK](https://flutter.dev/docs/get-started/install)
+- A code editor like [VS Code](https://code.visualstudio.com/) or [Android Studio](https://developer.android.com/studio)
+- [Hive](https://docs.hivedb.dev/) package and Hive Generator for Flutter
+- [Intl Package](https://pub.dev/packages/intl) for date formatting (optional)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+---
+
+### Setup Instructions
+
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/your-repo/flutter-employee-management.git
+   cd flutter-employee-management
