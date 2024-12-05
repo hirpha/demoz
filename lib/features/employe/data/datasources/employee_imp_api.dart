@@ -2,11 +2,16 @@ import 'package:demoz/features/employe/data/datasources/employee_data_source.dar
 import '../../../../main.dart';
 import '../models/employee.dart';
 
+import 'dart:developer';
+
 class EmployeeImpApi extends EmployeeDataSource {
   @override
   Future<List<Employee>> getEmployees(String companyId) async {
     try {
-      return employeeBox.values.where((e) => e.companyId == companyId).toList();
+      final employees =
+          employeeBox.values.where((e) => e.companyId == companyId).toList();
+      log(employees.toString());
+      return employees;
     } catch (e) {
       rethrow;
     }

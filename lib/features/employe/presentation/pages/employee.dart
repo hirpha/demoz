@@ -128,12 +128,16 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
                 hintText: "Gross Salary",
                 controller: grossSalaryController,
                 onChange: (value) {
+                  taxableEarningsController.text =
+                      (0.7 * double.parse(grossSalaryController.text))
+                          .toStringAsFixed(2);
                   isAllFieldValid();
                   setState(() {});
                 },
               ),
               SizedBox(height: 20),
               TextFieldWidget(
+                enabled: false,
                 hintText: "Taxable Earnings",
                 controller: taxableEarningsController,
                 onChange: (value) {

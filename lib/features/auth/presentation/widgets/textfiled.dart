@@ -4,11 +4,13 @@ class TextFieldWidget extends StatelessWidget {
   final String hintText;
   final TextEditingController controller;
   final Function onChange;
+  final bool enabled;
   const TextFieldWidget(
       {super.key,
       required this.hintText,
       required this.controller,
-      required this.onChange});
+      required this.onChange,
+      this.enabled = true});
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +36,7 @@ class TextFieldWidget extends StatelessWidget {
             onChanged: (value) {
               onChange(value);
             },
+            enabled: enabled,
             decoration: InputDecoration.collapsed(
               hintText: '',
               hintStyle: TextStyle(color: Color(0xFFACAFB5), fontSize: 14),
