@@ -52,148 +52,169 @@ class _SettingsState extends State<Settings> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: Colors.transparent,
-          title: const Text(
-            'Settings',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-            ),
-          ),
-        ),
         body: Container(
           padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: ListView(
+          child: Column(
             children: [
-              const SizedBox(height: 20),
-              _buildSection(
-                'Appearance',
-                [
-                  SwitchListTile(
-                    title: const Text('Dark Mode'),
-                    value: isDarkMode,
-                    onChanged: (value) {
-                      setState(() {
-                        isDarkMode = value;
-                        saveSettings();
-                      });
-                    },
-                  ),
-                ],
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.05,
               ),
-              _buildSection(
-                'Notifications',
-                [
-                  SwitchListTile(
-                    title: const Text('Enable Notifications'),
-                    value: isNotificationsEnabled,
-                    onChanged: (value) {
-                      setState(() {
-                        isNotificationsEnabled = value;
-                        saveSettings();
-                      });
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
                     },
+                    icon: const Icon(Icons.arrow_back_ios_new),
                   ),
-                ],
-              ),
-              _buildSection(
-                'Language',
-                [
-                  ListTile(
-                    title: const Text('Select Language'),
-                    trailing: DropdownButton<String>(
-                      value: selectedLanguage,
-                      items: ['English', 'Amharic']
-                          .map((String value) => DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              ))
-                          .toList(),
-                      onChanged: (String? newValue) {
-                        if (newValue != null) {
-                          setState(() {
-                            selectedLanguage = newValue;
-                            saveSettings();
-                          });
-                        }
-                      },
+                  Text(
+                    'Settings',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
                     ),
                   ),
-                ],
-              ),
-              _buildSection(
-                'About',
-                [
-                  ListTile(
-                    title: const Text('Version'),
-                    trailing: const Text('1.0.0'),
-                  ),
-                  ListTile(
-                    title: const Text('Terms of Service'),
-                    trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-                    onTap: () {
-                      // Navigate to Terms of Service
-                    },
-                  ),
-                  ListTile(
-                    title: const Text('Privacy Policy'),
-                    trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-                    onTap: () {
-                      // Navigate to Privacy Policy
-                    },
+                  IconButton(
+                    onPressed: () {},
+                    icon: const Icon(Icons.more_vert),
                   ),
                 ],
               ),
-              _buildSection(
-                'Account',
-                [
-                  ListTile(
-                    title: const Text(
-                      'Logout',
-                      style: TextStyle(
-                        color: Colors.red,
-                        fontWeight: FontWeight.w500,
-                      ),
+              Expanded(
+                child: ListView(
+                  children: [
+                    _buildSection(
+                      'Appearance',
+                      [
+                        SwitchListTile(
+                          title: const Text('Dark Mode'),
+                          value: isDarkMode,
+                          onChanged: (value) {
+                            setState(() {
+                              isDarkMode = value;
+                              saveSettings();
+                            });
+                          },
+                        ),
+                      ],
                     ),
-                    leading: const Icon(
-                      Icons.logout_rounded,
-                      color: Colors.red,
+                    _buildSection(
+                      'Notifications',
+                      [
+                        SwitchListTile(
+                          title: const Text('Enable Notifications'),
+                          value: isNotificationsEnabled,
+                          onChanged: (value) {
+                            setState(() {
+                              isNotificationsEnabled = value;
+                              saveSettings();
+                            });
+                          },
+                        ),
+                      ],
                     ),
-                    onTap: () {
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            title: const Text('Logout'),
-                            content:
-                                const Text('Are you sure you want to logout?'),
-                            actions: [
-                              TextButton(
-                                onPressed: () => Navigator.pop(context),
-                                child: const Text('Cancel'),
-                              ),
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.pop(context); // Close dialog
-                                  _handleLogout(context);
-                                },
-                                child: const Text(
-                                  'Logout',
-                                  style: TextStyle(
-                                    color: Colors.red,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          );
-                        },
-                      );
-                    },
-                  ),
-                ],
+                    _buildSection(
+                      'Language',
+                      [
+                        ListTile(
+                          title: const Text('Select Language'),
+                          trailing: DropdownButton<String>(
+                            value: selectedLanguage,
+                            items: ['English', 'Amharic']
+                                .map((String value) => DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(value),
+                                    ))
+                                .toList(),
+                            onChanged: (String? newValue) {
+                              if (newValue != null) {
+                                setState(() {
+                                  selectedLanguage = newValue;
+                                  saveSettings();
+                                });
+                              }
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                    _buildSection(
+                      'About',
+                      [
+                        ListTile(
+                          title: const Text('Version'),
+                          trailing: const Text('1.0.0'),
+                        ),
+                        ListTile(
+                          title: const Text('Terms of Service'),
+                          trailing:
+                              const Icon(Icons.arrow_forward_ios, size: 16),
+                          onTap: () {
+                            // Navigate to Terms of Service
+                          },
+                        ),
+                        ListTile(
+                          title: const Text('Privacy Policy'),
+                          trailing:
+                              const Icon(Icons.arrow_forward_ios, size: 16),
+                          onTap: () {
+                            // Navigate to Privacy Policy
+                          },
+                        ),
+                      ],
+                    ),
+                    _buildSection(
+                      'Account',
+                      [
+                        ListTile(
+                          title: const Text(
+                            'Logout',
+                            style: TextStyle(
+                              color: Colors.red,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          leading: const Icon(
+                            Icons.logout_rounded,
+                            color: Colors.red,
+                          ),
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: const Text('Logout'),
+                                  content: const Text(
+                                      'Are you sure you want to logout?'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () => Navigator.pop(context),
+                                      child: const Text('Cancel'),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.pop(context); // Close dialog
+                                        _handleLogout(context);
+                                      },
+                                      child: const Text(
+                                        'Logout',
+                                        style: TextStyle(
+                                          color: Colors.red,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
