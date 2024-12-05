@@ -17,6 +17,8 @@ class AuthImpApi extends AuthDataSource {
       );
       log('found company: ${company.email}');
       if (company.password == password) {
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setString('companyId', company.companyId!);
         return company;
       }
       throw Exception('Invalid email or password');

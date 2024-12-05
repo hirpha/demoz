@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -34,6 +35,10 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+    // SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    //   statusBarColor: Color.fromARGB(255, 255, 255, 255),
+    //   statusBarIconBrightness: Brightness.dark,
+    // ));
     getCompanyId().then((value) {
       context.read<EmployeBloc>().add(EmployeGetDashboard(value));
     });

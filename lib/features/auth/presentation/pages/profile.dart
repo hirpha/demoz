@@ -123,8 +123,8 @@ class _ProfileScreenState extends State<ProfileScreen>
                                 Positioned(
                                   right:
                                       MediaQuery.of(context).size.width * 0.3,
-                                  bottom:
-                                      MediaQuery.of(context).size.height * 0.09,
+                                  bottom: MediaQuery.of(context).size.height *
+                                      0.055,
                                   child: CircleAvatar(
                                     radius: 20,
                                     backgroundColor:

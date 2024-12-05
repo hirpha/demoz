@@ -63,7 +63,7 @@ flutter_launcher_icons:
   min_sdk_android: 21
   android_gravity: center
   android_resize_mode: "contain"
-  ios_image_size: "1024"
+  ios_image_size: "720"
   remove_alpha_ios: true
   background_color_ios: "#FFFFFF"
 
