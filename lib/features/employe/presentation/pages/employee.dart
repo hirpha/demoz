@@ -1,6 +1,7 @@
 import 'package:demoz/features/auth/presentation/widgets/textfiled.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 
@@ -32,6 +33,27 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
         tinNumberController.text.isNotEmpty &&
         grossSalaryController.text.isNotEmpty &&
         taxableEarningsController.text.isNotEmpty;
+  }
+
+  DateTime? _selectedDate;
+
+  Future<void> _selectDate(BuildContext context) async {
+    DateTime currentDate = DateTime.now();
+
+    final DateTime? pickedDate = await showDatePicker(
+      context: context,
+      initialDate: currentDate, // Set the default date to today
+      firstDate: DateTime(2000), // Set the earliest date
+      lastDate: DateTime(2100), // Set the latest date
+    );
+
+    if (pickedDate != null && pickedDate != _selectedDate) {
+      setState(() {
+        _selectedDate = pickedDate;
+        startingDateOfSalaryController.text =
+            DateFormat('dd-MM-yyyy').format(_selectedDate!.toLocal());
+      });
+    }
   }
 
   @override
@@ -126,6 +148,7 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
               SizedBox(height: 20),
               TextFieldWidget(
                 hintText: "Gross Salary",
+                isNumber: true,
                 controller: grossSalaryController,
                 onChange: (value) {
                   taxableEarningsController.text =
@@ -147,6 +170,7 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
               ),
               SizedBox(height: 20),
               TextFieldWidget(
+                onTap: _selectDate,
                 hintText: "Starting Date of Salary",
                 controller: startingDateOfSalaryController,
                 onChange: (value) {
