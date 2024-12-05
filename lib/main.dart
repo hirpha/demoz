@@ -26,10 +26,9 @@ late Box<Employee> employeeBox;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-    systemNavigationBarColor: Colors.black,
-    statusBarColor: Colors.black,
-    statusBarIconBrightness: Brightness.light,
-    systemNavigationBarIconBrightness: Brightness.light,
+   
+    statusBarColor: Color.fromARGB(255, 255, 255, 255),
+    statusBarIconBrightness: Brightness.dark,
   ));
   // Initialize Hive
   await Hive.initFlutter();

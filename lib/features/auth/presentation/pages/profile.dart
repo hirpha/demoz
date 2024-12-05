@@ -72,6 +72,13 @@ class _ProfileScreenState extends State<ProfileScreen>
             }
           },
           builder: (context, state) {
+            if (state is AuthGetCompanyLoading) {
+              return Center(
+                child: CircularProgressIndicator(
+                  color: Color(0xFF16C098),
+                ),
+              );
+            }
             if (state is AuthGetCompanySuccess) {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
