@@ -51,3 +51,10 @@ Employee ID,Name,Gross Salary,Pension Rate,Company ID
 E001,John Doe,2000,7,C001
 E002,Jane Smith,3000,7,C001
 E003,Bob Johnson,2500,8,C002
+
+
+### Download Employee Data
+
+You can download the sample employee data CSV file for this project:
+
+[Download employee_data.csv](https://github.com/hirpha/demoz/raw/main/employee_data.csv)
