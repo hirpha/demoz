@@ -40,8 +40,8 @@ Ensure you have the following installed on your system:
 
 1. **Clone the Repository**
    ```bash
-   git clone https://github.com/your-repo/flutter-employee-management.git
-   cd flutter-employee-management
+   git clone https://github.com/hirpha/demoz.git
+   cd demoz
 
 
 
