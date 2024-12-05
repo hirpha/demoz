@@ -4,6 +4,7 @@ import 'package:demoz/features/employe/presentation/bloc/employe_bloc.dart';
 import 'package:demoz/onboarding.dart';
 import 'package:demoz/splash.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -24,7 +25,12 @@ late Box<Company> companyBox;
 late Box<Employee> employeeBox;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    systemNavigationBarColor: Colors.black,
+    statusBarColor: Colors.black,
+    statusBarIconBrightness: Brightness.light,
+    systemNavigationBarIconBrightness: Brightness.light,
+  ));
   // Initialize Hive
   await Hive.initFlutter();
 

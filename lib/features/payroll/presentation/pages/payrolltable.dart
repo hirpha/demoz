@@ -115,8 +115,10 @@ class _PayrollTableState extends State<PayrollTable> {
                           state.employees[index].taxableEarnings ?? "",
                           (state.employees[index].grossSalary ?? 0).toDouble() *
                               0.2,
-                          (state.employees[index].grossSalary ?? 0).toDouble() *
-                              0.1,
+                          (state.employees[index].grossSalary ?? 0).toDouble() -
+                              (state.employees[index].grossSalary ?? 0)
+                                      .toDouble() *
+                                  0.7,
                           (state.employees[index].grossSalary ?? 0).toDouble(),
                           state.employees[index].employeeName ?? '',
                         ),
