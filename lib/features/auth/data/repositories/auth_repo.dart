@@ -29,4 +29,12 @@ class AuthRepository {
       rethrow;
     }
   }
+
+  Future<bool> checkEmail(String email) async {
+    try {
+      return await dataSource.checkEmail(email);
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

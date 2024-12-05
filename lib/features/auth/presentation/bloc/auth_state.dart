@@ -35,3 +35,12 @@ class AuthGetCompanyFailure extends AuthState {
   final String message;
   const AuthGetCompanyFailure({required this.message});
 }
+
+class AuthCheckEmailLoading extends AuthState {}
+
+class AuthCheckEmailSuccess extends AuthState {}
+
+class AuthCheckEmailFailure extends AuthState {
+  final String message;
+  const AuthCheckEmailFailure({required this.message});
+}

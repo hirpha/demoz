@@ -59,4 +59,9 @@ class AuthImpApi extends AuthDataSource {
       throw Exception('Company not found');
     }
   }
+
+  @override
+  Future<bool> checkEmail(String email) async {
+    return companyBox.values.any((c) => c.email == email);
+  }
 }

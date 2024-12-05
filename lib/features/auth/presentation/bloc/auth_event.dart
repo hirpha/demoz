@@ -22,3 +22,8 @@ class AuthGetCompanyEvent extends AuthEvent {
   final String companyId;
   const AuthGetCompanyEvent({required this.companyId});
 }
+
+class AuthCheckEmailEvent extends AuthEvent {
+  final String email;
+  const AuthCheckEmailEvent({required this.email});
+}

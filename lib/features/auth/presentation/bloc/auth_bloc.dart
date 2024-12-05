@@ -36,5 +36,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(AuthFailure(message: e.toString()));
       }
     });
+    on<AuthCheckEmailEvent>((event, emit) async {
+      try {
+        emit(AuthCheckEmailLoading());
+        await authRepository.checkEmail(event.email);
+        emit(AuthCheckEmailSuccess());
+      } catch (e) {
+        emit(AuthCheckEmailFailure(message: e.toString()));
+      }
+    });
   }
 }
