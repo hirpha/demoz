@@ -1,3 +1,4 @@
+import 'package:demoz/core/validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,20 +17,26 @@ class _SignInPageState extends State<SignInPage> {
   bool _obscureText = true;
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  String? emailError;
+  String? passwordError;
+
   bool isAllFieldValid() {
     return emailController.text.isNotEmpty &&
-        passwordController.text.isNotEmpty;
+        passwordController.text.isNotEmpty &&
+        emailError == null &&
+        passwordError == null;
   }
 
-  emailOnChange(String value) {
+  void emailOnChange(String value) {
     setState(() {
+      emailError = emailValidator(value);
       isAllFieldValid();
     });
-    print(isAllFieldValid());
   }
 
-  passwordOnChange(String value) {
+  void passwordOnChange(String value) {
     setState(() {
+      passwordError = passwordValidator(value);
       isAllFieldValid();
     });
   }
@@ -39,6 +46,8 @@ class _SignInPageState extends State<SignInPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
+          child: Form(
+        autovalidateMode: AutovalidateMode.always,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -92,57 +101,86 @@ class _SignInPageState extends State<SignInPage> {
               onChange: emailOnChange,
               hintText: 'Email Address',
               controller: emailController,
+              errorText: emailError,
             ),
             const SizedBox(height: 20),
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 20),
               alignment: Alignment.centerLeft,
-              height: 60,
+              height: 65,
               padding: const EdgeInsets.symmetric(horizontal: 20),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(15),
-                border: Border.all(color: const Color(0xFFADADAD)),
+                border: Border.all(
+                  color: passwordError != null
+                      ? Colors.red
+                      : const Color.fromARGB(255, 7, 110, 194),
+                ),
               ),
-              child: Row(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          'Password',
-                          style:
-                              TextStyle(color: Color(0xFFACAFB5), fontSize: 14),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Password',
+                              style: TextStyle(
+                                color: passwordError != null
+                                    ? Colors.red
+                                    : const Color(0xFFACAFB5),
+                                fontSize: 14,
+                              ),
+                            ),
+                            TextFormField(
+                              obscureText: _obscureText,
+                              // validator: passwordValidator,
+                              onChanged: passwordOnChange,
+                              controller: passwordController,
+                              decoration: const InputDecoration.collapsed(
+                                hintText: '',
+                                hintStyle: TextStyle(
+                                  color: Color(0xFFACAFB5),
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                        TextField(
-                          onChanged: (value) {
-                            passwordOnChange(value);
-                          },
-                          controller: passwordController,
-                          decoration: const InputDecoration.collapsed(
-                            hintText: '',
-                            hintStyle: TextStyle(
-                                color: Color(0xFFACAFB5), fontSize: 14),
-                          ),
+                      ),
+                      IconButton(
+                        icon: Icon(
+                          _obscureText
+                              ? Icons.visibility
+                              : Icons.visibility_off,
                         ),
-                      ],
-                    ),
-                  ),
-                  IconButton(
-                    icon: Icon(
-                      _obscureText ? Icons.visibility : Icons.visibility_off,
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        _obscureText = !_obscureText;
-                      });
-                    },
+                        onPressed: () {
+                          setState(() {
+                            _obscureText = !_obscureText;
+                          });
+                        },
+                      ),
+                    ],
                   ),
                 ],
               ),
             ),
+            if (passwordError != null)
+              Padding(
+                padding: const EdgeInsets.only(top: 5),
+                child: Text(
+                  passwordError!,
+                  style: const TextStyle(
+                    color: Colors.red,
+                    fontSize: 12,
+                  ),
+                ),
+              ),
             const SizedBox(height: 20),
             BlocConsumer<AuthBloc, AuthState>(listener: (context, state) {
               if (state is AuthSuccess) {
@@ -268,7 +306,7 @@ class _SignInPageState extends State<SignInPage> {
             ),
           ],
         ),
-      ),
+      )),
     );
   }
 }

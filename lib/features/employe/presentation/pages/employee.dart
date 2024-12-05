@@ -61,18 +61,7 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Color.fromARGB(255, 255, 255, 255),
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: Colors.transparent,
-          title: Text(''),
-          actions: [
-            Text(
-              "Add Employee",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(width: 10),
-          ],
-        ),
+     
         body: SingleChildScrollView(
           child: Column(
             children: [
