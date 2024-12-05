@@ -33,14 +33,23 @@ class _TaxSummeryState extends State<TaxSummery> {
           const SizedBox(height: 16.0),
           Text(
             "9,349.85 etb ",
-            style: TextStyle(fontSize: 14.0, color: Colors.grey),
+            style: TextStyle(
+                fontSize: 24.0,
+                color: Colors.black,
+                fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16.0),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text("49.98 %"),
-              Icon(Icons.arrow_upward_rounded, size: 16.0, color: Colors.green),
+              Text(
+                "49.98 %",
+                style: TextStyle(
+                    fontSize: 16.0,
+                    color: Colors.green,
+                    fontWeight: FontWeight.bold),
+              ),
+              Icon(Icons.arrow_drop_up, size: 30.0, color: Colors.green),
             ],
           ),
         ],

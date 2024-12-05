@@ -1,5 +1,6 @@
 import 'package:demoz/features/employe/data/datasources/employee_data_source.dart';
 import '../../../../main.dart';
+import '../models/dashboard.dart';
 import '../models/employee.dart';
 
 import 'dart:developer';
@@ -59,22 +60,64 @@ class EmployeeImpApi extends EmployeeDataSource {
   }
 
   @override
-  Future<int> totalIncomeTax(String companyId) async {
-    // return employeeBox.values
-    //     .where((e) => e.companyId == companyId)
-    //     .fold<int>(0, (sum, e) => sum + (e.incomeTax ?? 0));
-    return 0;
+  Future<Dashboard> getDashboard(String companyId) async {
+    return getAllDashboardData(companyId);
   }
 
-  @override
-  Future<int> totalPension(String companyId) async {
-    // return employeeBox.values
-    //     .where((e) => e.companyId == companyId)
-    //     .fold<int>(0, (sum, e) => sum + (e.pension ?? 0));
-    return 0;
+  Future<Dashboard> getAllDashboardData(String companyId) async {
+    final numberOfEmployees = await numberfEmployees(companyId);
+    final incomeTax = await allTotalIncomeTax(companyId);
+    final pensionTax = await allTotalPension(companyId);
+    // final performance = await allTotalPerformance(companyId);
+    final performance = 85.0;
+    final taxSummary = await allTotalTaxSummary(companyId);
+    final malesCount = await numberOfMales(companyId);
+
+    final femalesCount = await numberOfFemales(companyId);
+    return Dashboard(
+      numberOfEmployees: numberOfEmployees,
+      incomeTax: incomeTax,
+      pensionTax: pensionTax,
+      performance: performance,
+      taxSummary: taxSummary,
+      numberOfMales: malesCount,
+      numberOfFemales: femalesCount,
+    );
   }
 
-  @override
+  Future<int> numberOfMales(String companyId) async {
+    return employeeBox.values
+        .where((e) => e.companyId == companyId && e.gender == 'Male')
+        .length;
+  }
+
+  Future<int> numberOfFemales(String companyId) async {
+    return employeeBox.values
+        .where((e) => e.companyId == companyId && e.gender == 'Female')
+        .length;
+  }
+
+  Future<double> allTotalTaxSummary(String companyId) async {
+    return 0.0;
+  }
+
+  Future<int> numberfEmployees(String companyId) async {
+    return employeeBox.values.where((e) => e.companyId == companyId).length;
+  }
+
+  Future<double> allTotalIncomeTax(String companyId) async {
+    return employeeBox.values
+        .where((e) => e.companyId == companyId)
+        .fold<double>(0,
+            (sum, e) => sum + (double.parse(e.taxableEarnings ?? '0') * 0.05));
+  }
+
+  Future<double> allTotalPension(String companyId) async {
+    return employeeBox.values
+        .where((e) => e.companyId == companyId)
+        .fold<double>(0, (sum, e) => sum + (e.grossSalary ?? 0) * 0.07);
+  }
+
   Future<int> numberOfEmployees(String companyId) async {
     try {
       return employeeBox.values.where((e) => e.companyId == companyId).length;

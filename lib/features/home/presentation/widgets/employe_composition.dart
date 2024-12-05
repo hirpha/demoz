@@ -109,7 +109,7 @@ class EmployeeComposition extends StatelessWidget {
                         ),
                         const SizedBox(width: 5),
                         Text(
-                          "35%",
+                          "65%",
                           style: TextStyle(
                             fontSize: 12.0,
                             fontWeight: FontWeight.bold,

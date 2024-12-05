@@ -7,6 +7,7 @@ import 'package:uuid/uuid.dart';
 
 import '../../data/models/employee.dart';
 import '../bloc/employe_bloc.dart';
+import '../../../../features/auth/presentation/widgets/dropdown_widget.dart';
 
 class EmployeeScreen extends StatefulWidget {
   const EmployeeScreen({super.key});
@@ -25,7 +26,7 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
       TextEditingController();
   final TextEditingController startingDateOfSalaryController =
       TextEditingController();
-
+  final TextEditingController genderController = TextEditingController();
   bool isAllFieldValid() {
     return employeeNameController.text.isNotEmpty &&
         emailController.text.isNotEmpty &&
@@ -56,6 +57,7 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
     }
   }
 
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -118,6 +120,12 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
                   setState(() {});
                 },
               ),
+              SizedBox(height: 20),
+              DropdownWidget(
+                hintText: "Gender",
+                controller: genderController,
+              ),
+
               SizedBox(height: 20),
               TextFieldWidget(
                 hintText: "Email Address",
@@ -248,6 +256,7 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
                                   .read<EmployeBloc>()
                                   .add(EmployeCreateEmployee(Employee(
                                     employeeName: employeeNameController.text,
+                                    gender: genderController.text,
                                     email: emailController.text,
                                     phoneNumber: phoneNumberController.text,
                                     tinNumber: tinNumberController.text,
