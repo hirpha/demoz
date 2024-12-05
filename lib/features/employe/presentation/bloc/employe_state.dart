@@ -98,3 +98,11 @@ class EmployeGetDashboardFailure extends EmployeState {
 
   const EmployeGetDashboardFailure({required this.message});
 }
+
+class EmployeImportCsvToHiveSuccess extends EmployeState {}
+
+class EmployeImportCsvToHiveFailure extends EmployeState {
+  final String message;
+
+  const EmployeImportCsvToHiveFailure({required this.message});
+}

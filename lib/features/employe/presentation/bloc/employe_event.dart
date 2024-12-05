@@ -42,3 +42,9 @@ class EmployeGetDashboard extends EmployeEvent {
 
   const EmployeGetDashboard(this.companyId);
 }
+
+class EmployeImportCsvToHiveEvent extends EmployeEvent {
+  final String csvFilePath;
+
+  const EmployeImportCsvToHiveEvent({required this.csvFilePath});
+}

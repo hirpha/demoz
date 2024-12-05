@@ -1,4 +1,9 @@
+import 'dart:io';
+
+import 'package:csv/csv.dart';
 import 'package:demoz/features/employe/data/datasources/employee_data_source.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../main.dart';
 import '../models/dashboard.dart';
 import '../models/employee.dart';
@@ -79,6 +84,46 @@ class EmployeeImpApi extends EmployeeDataSource {
       numberOfMales: malesCount,
       numberOfFemales: femalesCount,
     );
+  }
+
+  @override
+  Future<void> importCsvToHive(String csvFilePath) async {
+    try {
+      SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
+      String companyId = sharedPreferences.getString('companyId') ?? '';
+      // Open the Hive box where data will be stored
+
+      // Read the CSV file
+      final input = File(csvFilePath).readAsStringSync();
+      List<List<dynamic>> rows = CsvToListConverter().convert(input);
+      log(rows.toString());
+      // Skip the header row and insert the employee data
+      for (var row in rows.skip(1)) {
+        Employee employee = Employee(
+          email: row[0].toString(),
+          empoyeeId: row[1].toString(),
+          password: row[2].toString(),
+          employeeName: row[3].toString(),
+          employeeAddress: row[4].toString(),
+          phoneNumber: row[5].toString(),
+          tinNumber: row[6].toString(),
+          grossSalary: double.parse(row[7].toString()),
+          taxableEarnings: row[8].toString(),
+          startDate: row[9].toString(),
+          companyId: companyId,
+          gender: row[11].toString(),
+        );
+
+        // Save the employee object in Hive
+        await employeeBox.add(employee);
+      }
+
+      print('CSV Data Imported to Hive');
+    } catch (e) {
+      log(e.toString());
+      rethrow;
+    }
   }
 
   Future<int> numberOfMales(String companyId) async {

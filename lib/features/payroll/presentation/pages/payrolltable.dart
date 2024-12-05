@@ -1,3 +1,5 @@
+import 'package:file_picker/file_picker.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -23,6 +25,28 @@ class _PayrollTableState extends State<PayrollTable> {
     BlocProvider.of<EmployeBloc>(context).add(EmployeGetEmployees(companyId));
   }
 
+  String? fileName;
+
+  Future<void> pickFile() async {
+    // Pick the CSV file
+    FilePickerResult? result = await FilePicker.platform
+        .pickFiles(type: FileType.custom, allowedExtensions: ['csv']);
+
+    if (result != null) {
+      setState(() {
+        fileName = result.files.single.name;
+      });
+
+      // If the file is selected, you can proceed with uploading the file
+      BlocProvider.of<EmployeBloc>(context).add(EmployeImportCsvToHiveEvent(
+          csvFilePath: result.files.single
+              .path!)); // Pass the file path to the upload function
+    } else {
+      // User canceled the picker
+      print("No file selected.");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +59,7 @@ class _PayrollTableState extends State<PayrollTable> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Row(
+                Row(
                   children: [
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -45,30 +69,46 @@ class _PayrollTableState extends State<PayrollTable> {
                           style: TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold),
                         ),
-                        Row(
-                          children: [
-                            Icon(Icons.upload_file),
-                            Text('upload CSV'),
-                          ],
+                        InkWell(
+                          onTap: pickFile,
+                          child: Row(
+                            children: [
+                              Icon(Icons.upload_file),
+                              Text('upload CSV'),
+                            ],
+                          ),
                         ),
                       ],
                     ),
                   ],
                 ),
-                ElevatedButton.icon(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/employee');
+                BlocConsumer<EmployeBloc, EmployeState>(
+                  listener: (context, state) {
+                    if (state is EmployeImportCsvToHiveSuccess) {
+                      getEmployees();
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                            content: Text('CSV Data Imported Successfully')),
+                      );
+                    }
                   },
-                  style: ElevatedButton.styleFrom(
-                    elevation: 0,
-                    backgroundColor: Color(0xFF16C098),
-                    foregroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                  ),
-                  icon: const Icon(Icons.add_circle_outline_rounded),
-                  label: const Text('Add Employee'),
+                  builder: (context, state) {
+                    return ElevatedButton.icon(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/employee');
+                      },
+                      style: ElevatedButton.styleFrom(
+                        elevation: 0,
+                        backgroundColor: Color(0xFF16C098),
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                      ),
+                      icon: const Icon(Icons.add_circle_outline_rounded),
+                      label: const Text('Add Employee'),
+                    );
+                  },
                 ),
               ],
             ),
@@ -79,6 +119,7 @@ class _PayrollTableState extends State<PayrollTable> {
               scrollDirection: Axis.horizontal,
               child: BlocConsumer<EmployeBloc, EmployeState>(
                 listener: (context, state) {
+                  print('state: $state');
                   if (state is EmployeGetEmployeesFailure) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text(state.message)),
@@ -86,6 +127,18 @@ class _PayrollTableState extends State<PayrollTable> {
                   }
                 },
                 builder: (context, state) {
+                  if (state is EmployeGetEmployeesLoading) {
+                    print('loading');
+                    return Container(
+                      height: MediaQuery.of(context).size.height * 0.8,
+                      width: MediaQuery.of(context).size.width,
+                      child: Center(
+                        child: CircularProgressIndicator(
+                          color: Color(0xFF16C098),
+                        ),
+                      ),
+                    );
+                  }
                   if (state is EmployeGetEmployeesSuccess) {
                     return DataTable(
                       dataRowColor: MaterialStateColor.resolveWith((states) {
@@ -121,6 +174,7 @@ class _PayrollTableState extends State<PayrollTable> {
                       ),
                     );
                   }
+
                   return const SizedBox();
                 },
               ),

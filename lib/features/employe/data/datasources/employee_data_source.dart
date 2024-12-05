@@ -1,4 +1,4 @@
-import '../models/employee.dart';
+  import '../models/employee.dart';
 import '../models/dashboard.dart';
 
 abstract class EmployeeDataSource {
@@ -8,4 +8,5 @@ abstract class EmployeeDataSource {
   Future<Employee> updateEmployee(Employee employee);
   Future<void> deleteEmployee(String employeeId);
   Future<Dashboard> getAllDashboardData(String companyId);
+  Future<void> importCsvToHive(String csvFilePath);
 }

@@ -72,5 +72,13 @@ class EmployeBloc extends Bloc<EmployeEvent, EmployeState> {
         emit(EmployeGetDashboardFailure(message: e.toString()));
       }
     });
+    on<EmployeImportCsvToHiveEvent>((event, emit) async {
+      try {
+        await employeRepo.importCsvToHive(event.csvFilePath);
+        emit(EmployeImportCsvToHiveSuccess());
+      } catch (e) {
+        emit(EmployeImportCsvToHiveFailure(message: e.toString()));
+      }
+    });
   }
 }

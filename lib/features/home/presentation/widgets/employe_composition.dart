@@ -69,7 +69,7 @@ class EmployeeComposition extends StatelessWidget {
                   left: -10,
                   child: Container(
                     padding: const EdgeInsets.all(5),
-                    height: 50,
+                    height: 40,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(10.0),
@@ -85,7 +85,7 @@ class EmployeeComposition extends StatelessWidget {
                         Text(
                           "${dashboard.femalePercentage.toStringAsFixed(2)}  %",
                           style: const TextStyle(
-                            fontSize: 12.0,
+                            fontSize: 10.0,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -98,7 +98,7 @@ class EmployeeComposition extends StatelessWidget {
                   right: 0,
                   child: Container(
                     padding: const EdgeInsets.all(5),
-                    height: 50,
+                    height: 40,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(10.0),
@@ -114,7 +114,7 @@ class EmployeeComposition extends StatelessWidget {
                         Text(
                           "${dashboard.malePercentage.toStringAsFixed(2)}  %",
                           style: const TextStyle(
-                            fontSize: 12.0,
+                            fontSize: 10.0,
                             fontWeight: FontWeight.bold,
                           ),
                         ),

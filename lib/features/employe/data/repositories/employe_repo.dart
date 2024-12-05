@@ -54,4 +54,12 @@ class EmployeRepo {
       rethrow;
     }
   }
+
+  Future<void> importCsvToHive(String csvFilePath) async {
+    try {
+      return await employeeDataSource.importCsvToHive(csvFilePath);
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

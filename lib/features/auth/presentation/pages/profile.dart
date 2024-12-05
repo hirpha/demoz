@@ -76,7 +76,7 @@ class _ProfileScreenState extends State<ProfileScreen>
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.08),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.05),
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     margin: const EdgeInsets.symmetric(horizontal: 20),
@@ -99,7 +99,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(
-                            height: MediaQuery.of(context).size.height * 0.24,
+                            height: MediaQuery.of(context).size.height * 0.27,
                             width: double.infinity,
                             margin: const EdgeInsets.symmetric(horizontal: 20),
                             child: Stack(
