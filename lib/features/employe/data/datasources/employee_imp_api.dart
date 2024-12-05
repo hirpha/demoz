@@ -60,10 +60,6 @@ class EmployeeImpApi extends EmployeeDataSource {
   }
 
   @override
-  Future<Dashboard> getDashboard(String companyId) async {
-    return getAllDashboardData(companyId);
-  }
-
   Future<Dashboard> getAllDashboardData(String companyId) async {
     final numberOfEmployees = await numberfEmployees(companyId);
     final incomeTax = await allTotalIncomeTax(companyId);

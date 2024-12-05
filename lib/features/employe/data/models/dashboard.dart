@@ -29,4 +29,24 @@ class Dashboard {
       numberOfFemales: json['number_of_females'] ?? 0,
     );
   }
+
+  double get malePercentage {
+    if (numberOfEmployees == 0) {
+      return 0.0; // Avoid division by zero
+    }
+    if (numberOfMales == 0) {
+      return 0.0;
+    }
+    return (numberOfMales / numberOfEmployees) * 100;
+  }
+
+  double get femalePercentage {
+    if (numberOfEmployees == 0) {
+      return 0.0; // Avoid division by zero
+    }
+    if (numberOfFemales == 0) {
+      return 0.0;
+    }
+    return (numberOfFemales / numberOfEmployees) * 100;
+  }
 }

@@ -57,7 +57,6 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
     }
   }
 
- 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -125,7 +124,6 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
                 hintText: "Gender",
                 controller: genderController,
               ),
-
               SizedBox(height: 20),
               TextFieldWidget(
                 hintText: "Email Address",
@@ -223,8 +221,9 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
                 listener: (context, state) {
                   if (state is EmployeCreateEmployeeSuccess) {
                     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                        content: Text('Employee added'),
-                        backgroundColor: Color.fromARGB(255, 48, 254, 89)));
+                        content: Text('Employee added',
+                            style: TextStyle(color: Colors.white)),
+                        backgroundColor: Color.fromARGB(255, 1, 3, 35)));
                     context
                         .read<EmployeBloc>()
                         .add(EmployeGetEmployees(state.employee.companyId!));

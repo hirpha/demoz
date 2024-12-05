@@ -1,4 +1,5 @@
 import '../datasources/employee_data_source.dart';
+import '../models/dashboard.dart';
 import '../models/employee.dart';
 
 class EmployeRepo {
@@ -41,6 +42,14 @@ class EmployeRepo {
   Future<void> deleteEmployee(String employeeId) async {
     try {
       return await employeeDataSource.deleteEmployee(employeeId);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<Dashboard> getAllDashboardData(String companyId) async {
+    try {
+      return await employeeDataSource.getAllDashboardData(companyId);
     } catch (e) {
       rethrow;
     }

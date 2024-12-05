@@ -84,3 +84,17 @@ class EmployeGetEmployeeFailure extends EmployeState {
 
   const EmployeGetEmployeeFailure({required this.message});
 }
+
+class EmployeGetDashboardLoading extends EmployeState {}
+
+class EmployeGetDashboardSuccess extends EmployeState {
+  final Dashboard dashboard;
+
+  const EmployeGetDashboardSuccess({required this.dashboard});
+}
+
+class EmployeGetDashboardFailure extends EmployeState {
+  final String message;
+
+  const EmployeGetDashboardFailure({required this.message});
+}

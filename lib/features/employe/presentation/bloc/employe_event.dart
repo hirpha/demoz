@@ -18,6 +18,7 @@ class EmployeUpdateEmployee extends EmployeEvent {
 
   const EmployeUpdateEmployee(this.employee);
 }
+
 class EmployeDeleteEmployee extends EmployeEvent {
   final String employeeId;
 
@@ -34,4 +35,10 @@ class EmployeGetEmployee extends EmployeEvent {
   final String employeeId;
 
   const EmployeGetEmployee(this.employeeId);
+}
+
+class EmployeGetDashboard extends EmployeEvent {
+  final String companyId;
+
+  const EmployeGetDashboard(this.companyId);
 }

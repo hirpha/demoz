@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import '../../../employe/data/models/dashboard.dart';
 
 class TaxItem extends StatelessWidget {
-  const TaxItem({super.key});
+  final Dashboard dashboard;
+  const TaxItem({super.key, required this.dashboard});
 
   @override
   Widget build(BuildContext context) {

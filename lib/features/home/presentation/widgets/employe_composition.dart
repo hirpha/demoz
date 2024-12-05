@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import '../../../employe/data/models/dashboard.dart';
 
 class EmployeeComposition extends StatelessWidget {
+  final Dashboard dashboard;
+  const EmployeeComposition({super.key, required this.dashboard});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -80,8 +83,8 @@ class EmployeeComposition extends StatelessWidget {
                         ),
                         const SizedBox(width: 5),
                         Text(
-                          "35%",
-                          style: TextStyle(
+                          "${dashboard.femalePercentage.toStringAsFixed(2)}  %",
+                          style: const TextStyle(
                             fontSize: 12.0,
                             fontWeight: FontWeight.bold,
                           ),
@@ -109,8 +112,8 @@ class EmployeeComposition extends StatelessWidget {
                         ),
                         const SizedBox(width: 5),
                         Text(
-                          "65%",
-                          style: TextStyle(
+                          "${dashboard.malePercentage.toStringAsFixed(2)}  %",
+                          style: const TextStyle(
                             fontSize: 12.0,
                             fontWeight: FontWeight.bold,
                           ),
@@ -124,8 +127,8 @@ class EmployeeComposition extends StatelessWidget {
           ),
           const SizedBox(height: 16.0),
           Text(
-            "856 employee total",
-            style: TextStyle(
+            "${dashboard.numberOfEmployees} employee total",
+            style: const TextStyle(
               fontSize: 12.0,
               color: Colors.grey,
               fontWeight: FontWeight.bold,

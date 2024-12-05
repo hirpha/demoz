@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../data/datasources/employee_imp_api.dart';
+import '../../data/models/dashboard.dart';
 import '../../data/models/employee.dart';
 import '../../data/repositories/employe_repo.dart';
 
@@ -59,6 +60,16 @@ class EmployeBloc extends Bloc<EmployeEvent, EmployeState> {
         emit(EmployeGetEmployeeSuccess(employee: result));
       } catch (e) {
         emit(EmployeGetEmployeeFailure(message: e.toString()));
+      }
+    });
+
+    on<EmployeGetDashboard>((event, emit) async {
+      emit(EmployeGetDashboardLoading());
+      try {
+        final result = await employeRepo.getAllDashboardData(event.companyId);
+        emit(EmployeGetDashboardSuccess(dashboard: result));
+      } catch (e) {
+        emit(EmployeGetDashboardFailure(message: e.toString()));
       }
     });
   }
