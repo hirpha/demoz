@@ -111,7 +111,7 @@ class _SignInPageState extends State<SignInPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        const Text(
                           'Password',
                           style:
                               TextStyle(color: Color(0xFFACAFB5), fontSize: 14),
@@ -121,7 +121,7 @@ class _SignInPageState extends State<SignInPage> {
                             passwordOnChange(value);
                           },
                           controller: passwordController,
-                          decoration: InputDecoration.collapsed(
+                          decoration: const InputDecoration.collapsed(
                             hintText: '',
                             hintStyle: TextStyle(
                                 color: Color(0xFFACAFB5), fontSize: 14),
@@ -152,6 +152,21 @@ class _SignInPageState extends State<SignInPage> {
                 ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Invalid email or password')));
               }
+              if (state is AuthCheckEmailFailure) {
+                ScaffoldMessenger.of(context)
+                    .showSnackBar(SnackBar(content: Text(state.message)));
+              }
+              if (state is AuthCheckEmailSuccess) {
+                if (widget.login == 'signup') {
+                  Navigator.pushNamed(context, '/register',
+                      arguments: {'email': emailController.text});
+                } else {
+                  context.read<AuthBloc>().add(AuthSignInEvent(
+                        email: emailController.text,
+                        password: passwordController.text,
+                      ));
+                }
+              }
             }, builder: (context, state) {
               return Container(
                 height: 60,
@@ -171,18 +186,9 @@ class _SignInPageState extends State<SignInPage> {
                   onPressed: !isAllFieldValid()
                       ? null
                       : () {
-                          if (widget.login == 'signup') {
-                            Navigator.pushNamed(context, '/register',
-                                arguments: {
-                                  'email': emailController.text,
-                                  'password': passwordController.text,
-                                });
-                          } else {
-                            context.read<AuthBloc>().add(AuthSignInEvent(
-                                  email: emailController.text,
-                                  password: passwordController.text,
-                                ));
-                          }
+                          context.read<AuthBloc>().add(AuthCheckEmailEvent(
+                                email: emailController.text,
+                              ));
                         },
                   child: Text(
                       state is AuthLoading
@@ -194,7 +200,7 @@ class _SignInPageState extends State<SignInPage> {
                           fontSize: 16,
                           fontWeight: FontWeight.w400,
                           color: isAllFieldValid()
-                              ? Color.fromARGB(255, 255, 255, 255)
+                              ? const Color.fromARGB(255, 255, 255, 255)
                               : Colors.black)),
                 ),
               );

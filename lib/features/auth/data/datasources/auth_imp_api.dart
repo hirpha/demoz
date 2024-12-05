@@ -32,6 +32,11 @@ class AuthImpApi extends AuthDataSource {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       log('registering company');
       log(company.toString());
+      bool isEmailTaken = await checkEmail(company.email!);
+
+      if (isEmailTaken) {
+        throw Exception('Email already taken');
+      }
 
       if (company.companyId == null || company.companyId!.isEmpty) {
         throw Exception('Company ID cannot be null or empty');
