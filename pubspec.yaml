@@ -58,7 +58,14 @@ flutter_launcher_icons:
   android: true
   ios: true
   image_path: "assets/images/logo_color.png"
-  min_sdk_android: 21 # android min sdk min:16, default 21  
+  adaptive_icon_background: "#FFFFFF"
+  adaptive_icon_foreground: "assets/images/logo1.png"
+  min_sdk_android: 21
+  android_gravity: center
+  android_resize_mode: "contain"
+  ios_image_size: "1024"
+  remove_alpha_ios: true
+  background_color_ios: "#FFFFFF"
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
