@@ -67,31 +67,27 @@ class _PayrollTableState extends State<PayrollTable> {
                       borderRadius: BorderRadius.circular(5),
                     ),
                   ),
-                  icon: const Icon(Icons.add),
+                  icon: const Icon(Icons.add_circle_outline_rounded),
                   label: const Text('Add Employee'),
                 ),
               ],
             ),
           ),
           SizedBox(),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: BlocConsumer<EmployeBloc, EmployeState>(
-              listener: (context, state) {
-                if (state is EmployeGetEmployeesFailure) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text(state.message)),
-                  );
-                }
-                if (state is EmployeGetEmployeesSuccess) {
-                  print('Employees fetched successfully');
-                  print(state.employees.length);
-                }
-              },
-              builder: (context, state) {
-                if (state is EmployeGetEmployeesSuccess) {
-                  return Expanded(
-                    child: DataTable(
+          Expanded(
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: BlocConsumer<EmployeBloc, EmployeState>(
+                listener: (context, state) {
+                  if (state is EmployeGetEmployeesFailure) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text(state.message)),
+                    );
+                  }
+                },
+                builder: (context, state) {
+                  if (state is EmployeGetEmployeesSuccess) {
+                    return DataTable(
                       dataRowColor: MaterialStateColor.resolveWith((states) {
                         return Colors.transparent;
                       }),
@@ -123,11 +119,11 @@ class _PayrollTableState extends State<PayrollTable> {
                           state.employees[index].employeeName ?? '',
                         ),
                       ),
-                    ),
-                  );
-                }
-                return const SizedBox();
-              },
+                    );
+                  }
+                  return const SizedBox();
+                },
+              ),
             ),
           ),
         ],

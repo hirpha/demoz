@@ -18,16 +18,24 @@ class TaxItem extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Column(
+              const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     'Date',
-                    style: TextStyle(fontSize: 12, color: Color(0xFF101317)),
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Color(0xFF101317),
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   Text(
                     'Aug 28, 2024 - Sep 5, 2024',
-                    style: TextStyle(fontSize: 14, color: Color(0xFF101317)),
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Color(0xFF101317),
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ],
               ),
