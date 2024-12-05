@@ -8,6 +8,7 @@ import 'package:uuid/uuid.dart';
 import '../../../auth/presentation/widgets/dropdown_widget.dart';
 import '../../data/models/employee.dart';
 import '../bloc/employe_bloc.dart';
+import '../../../../core/validator.dart';
 
 class EmployeeScreen extends StatefulWidget {
   const EmployeeScreen({super.key});
@@ -27,13 +28,82 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
   final TextEditingController startingDateOfSalaryController =
       TextEditingController();
   final TextEditingController genderController = TextEditingController();
+  String? employeeNameError;
+  String? emailError;
+  String? phoneError;
+  String? tinError;
+  String? salaryError;
+  String? genderError;
+  String? startDateError;
+
   bool isAllFieldValid() {
     return employeeNameController.text.isNotEmpty &&
         emailController.text.isNotEmpty &&
         phoneNumberController.text.isNotEmpty &&
         tinNumberController.text.isNotEmpty &&
         grossSalaryController.text.isNotEmpty &&
-        taxableEarningsController.text.isNotEmpty;
+        genderController.text.isNotEmpty &&
+        startingDateOfSalaryController.text.isNotEmpty &&
+        employeeNameError == null &&
+        emailError == null &&
+        phoneError == null &&
+        tinError == null &&
+        salaryError == null &&
+        genderError == null &&
+        startDateError == null;
+  }
+
+  void employeeNameOnChange(String value) {
+    setState(() {
+      employeeNameError = nameValidator(value);
+      isAllFieldValid();
+    });
+  }
+
+  void emailOnChange(String value) {
+    setState(() {
+      emailError = emailValidator(value);
+      isAllFieldValid();
+    });
+  }
+
+  void phoneNumberOnChange(String value) {
+    setState(() {
+      phoneError = phoneValidator(value);
+      isAllFieldValid();
+    });
+  }
+
+  void tinNumberOnChange(String value) {
+    setState(() {
+      tinError = tinNumberValidator(value);
+      isAllFieldValid();
+    });
+  }
+
+  void salaryOnChange(String value) {
+    setState(() {
+      salaryError = salaryValidator(value);
+      if (salaryError == null && value.isNotEmpty) {
+        taxableEarningsController.text =
+            (0.7 * double.parse(value)).toStringAsFixed(2);
+      }
+      isAllFieldValid();
+    });
+  }
+
+  void genderOnChange(String value) {
+    setState(() {
+      genderError = genderValidator(value);
+      isAllFieldValid();
+    });
+  }
+
+  void dateOnChange(String value) {
+    setState(() {
+      startDateError = dateValidator(value);
+      isAllFieldValid();
+    });
   }
 
   DateTime? _selectedDate;
@@ -61,7 +131,6 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Color.fromARGB(255, 255, 255, 255),
-     
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -102,76 +171,59 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
               TextFieldWidget(
                 hintText: "Employee Name",
                 controller: employeeNameController,
-                onChange: (value) {
-                  isAllFieldValid();
-                  setState(() {});
-                  setState(() {});
-                },
+                onChange: employeeNameOnChange,
+                errorText: employeeNameError,
               ),
               SizedBox(height: 20),
               DropdownWidget(
                 hintText: "Gender",
                 controller: genderController,
+                errorText: genderError,
+                onChange: genderOnChange,
               ),
               SizedBox(height: 20),
               TextFieldWidget(
                 hintText: "Email Address",
                 controller: emailController,
-                onChange: (value) {
-                  isAllFieldValid();
-                  setState(() {});
-                },
+                onChange: emailOnChange,
+                errorText: emailError,
               ),
               SizedBox(height: 20),
               TextFieldWidget(
                 hintText: "Phone Number",
                 controller: phoneNumberController,
-                onChange: (value) {
-                  isAllFieldValid();
-                  setState(() {});
-                },
+                onChange: phoneNumberOnChange,
+                errorText: phoneError,
               ),
               SizedBox(height: 20),
               TextFieldWidget(
                 hintText: "TIN Number",
                 controller: tinNumberController,
-                onChange: (value) {
-                  isAllFieldValid();
-                  setState(() {});
-                },
+                onChange: tinNumberOnChange,
+                errorText: tinError,
               ),
               SizedBox(height: 20),
               TextFieldWidget(
                 hintText: "Gross Salary",
                 isNumber: true,
                 controller: grossSalaryController,
-                onChange: (value) {
-                  taxableEarningsController.text =
-                      (0.7 * double.parse(grossSalaryController.text))
-                          .toStringAsFixed(2);
-                  isAllFieldValid();
-                  setState(() {});
-                },
+                onChange: salaryOnChange,
+                errorText: salaryError,
               ),
               SizedBox(height: 20),
               TextFieldWidget(
                 enabled: false,
                 hintText: "Taxable Earnings",
                 controller: taxableEarningsController,
-                onChange: (value) {
-                  isAllFieldValid();
-                  setState(() {});
-                },
+                onChange: (value) {},
               ),
               SizedBox(height: 20),
               TextFieldWidget(
                 onTap: _selectDate,
                 hintText: "Starting Date of Salary",
                 controller: startingDateOfSalaryController,
-                onChange: (value) {
-                  isAllFieldValid();
-                  setState(() {});
-                },
+                onChange: dateOnChange,
+                errorText: startDateError,
               ),
               SizedBox(height: 20),
               Container(
@@ -229,7 +281,7 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
                         elevation: 0,
                         backgroundColor: isAllFieldValid()
                             ? Color(0xFF3085FE)
-                            : Color(0xFFACAFB5),
+                            : Color.fromARGB(255, 218, 218, 218),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10)),
                       ),
@@ -264,7 +316,11 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
                         state is EmployeCreateEmployeeLoading
                             ? "Adding..."
                             : "Add Employee",
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(
+                          color: isAllFieldValid()
+                              ? Colors.white
+                              : Color(0xFF292D32),
+                        ),
                       ),
                     ),
                   );
