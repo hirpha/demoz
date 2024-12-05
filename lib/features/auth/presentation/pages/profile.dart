@@ -96,7 +96,10 @@ class _ProfileScreenState extends State<ProfileScreen>
                               fontSize: 28, fontWeight: FontWeight.bold),
                         ),
                         IconButton(
-                            onPressed: () {}, icon: const Icon(Icons.settings)),
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/settings');
+                            },
+                            icon: const Icon(Icons.settings)),
                       ],
                     ),
                   ),
@@ -120,8 +123,8 @@ class _ProfileScreenState extends State<ProfileScreen>
                                 Positioned(
                                   right:
                                       MediaQuery.of(context).size.width * 0.3,
-                                  bottom: MediaQuery.of(context).size.height *
-                                      0.048,
+                                  bottom:
+                                      MediaQuery.of(context).size.height * 0.09,
                                   child: CircleAvatar(
                                     radius: 20,
                                     backgroundColor:
