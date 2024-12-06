@@ -33,15 +33,32 @@ Ensure you have the following installed on your system:
 - A code editor like [VS Code](https://code.visualstudio.com/) or [Android Studio](https://developer.android.com/studio)
 - [Hive](https://docs.hivedb.dev/) package and Hive Generator for Flutter
 - [Intl Package](https://pub.dev/packages/intl) for date formatting (optional)
+- [Mocktail](https://pub.dev/packages/mocktail) for mocking in tests
+- [Bloc Test](https://pub.dev/packages/bloc_test) for testing blocs
+- [Flutter Test](https://pub.dev/packages/flutter_test) for testing widgets
+- [Bloc](https://pub.dev/packages/bloc) for state management
+
 
 ---
 
 ### Setup Instructions
 
+
 1. **Clone the Repository**
    ```bash
    git clone https://github.com/hirpha/demoz.git
    cd demoz
+   ```
+
+2. **Install Dependencies**
+   ```bash
+   flutter pub get
+   ```
+
+3. **Run the App**
+   ```bash
+   flutter run
+   ```
 
 
 
