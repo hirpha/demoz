@@ -134,6 +134,26 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
         body: SingleChildScrollView(
           child: Column(
             children: [
+              SizedBox(
+                height: MediaQuery.of(context).size.height * .06,
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                width: double.infinity,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    IconButton(
+                        onPressed: () => Navigator.pop(context),
+                        icon: Icon(Icons.arrow_back)),
+                    Text(
+                      "Add Employee",
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ),
               Container(
                 width: double.infinity,
                 margin: const EdgeInsets.symmetric(horizontal: 20),

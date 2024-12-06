@@ -48,13 +48,15 @@ dependencies:
   csv: ^6.0.0
   file_picker: ^8.1.4
   flutter_launcher_icons: ^0.14.1
+  mocktail: ^1.0.4
 
 dev_dependencies:
   hive_generator: 
-  build_runner: ^2.4.13
+  build_runner: ^2.4.8
   flutter_test:
     sdk: flutter
-  mockito:  
+  mockito: ^5.4.4
+
 flutter_launcher_icons:
   android: true
   ios: true

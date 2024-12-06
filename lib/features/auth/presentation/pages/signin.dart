@@ -171,7 +171,8 @@ class _SignInPageState extends State<SignInPage> {
               ),
             ),
             if (passwordError != null)
-              Padding(
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 20),
                 padding: const EdgeInsets.only(top: 5),
                 child: Text(
                   passwordError!,
