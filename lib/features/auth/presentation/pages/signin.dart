@@ -273,7 +273,7 @@ class _SignInPageState extends State<SignInPage> {
                 ],
               ),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.1),
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 20),
               child: Row(

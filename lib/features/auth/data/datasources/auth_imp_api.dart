@@ -72,3 +72,4 @@ class AuthImpApi extends AuthDataSource {
     return companyBox.values.any((c) => c.email == email);
   }
 }
+

@@ -66,7 +66,7 @@ class _SettingsState extends State<Settings> {
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    icon: const Icon(Icons.arrow_back_ios_new),
+                    icon: const Icon(Icons.arrow_back_rounded),
                   ),
                   Text(
                     'Settings',

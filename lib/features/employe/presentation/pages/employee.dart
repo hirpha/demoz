@@ -35,6 +35,7 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
   String? salaryError;
   String? genderError;
   String? startDateError;
+  bool isPerMonth = true;
 
   bool isAllFieldValid() {
     return employeeNameController.text.isNotEmpty &&
@@ -240,6 +241,7 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
               SizedBox(height: 20),
               TextFieldWidget(
                 onTap: _selectDate,
+                enabled: false,
                 hintText: "Starting Date of Salary",
                 controller: startingDateOfSalaryController,
                 onChange: dateOnChange,
@@ -253,27 +255,45 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
                       ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             elevation: 0,
-                            backgroundColor: Color(0xFF3085FE),
+                            backgroundColor: isPerMonth
+                                ? Color(0xFF3085FE)
+                                : Color(0xFFEEEFF0),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10)),
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            setState(() {
+                              isPerMonth = true;
+                            });
+                          },
                           child: Text(
                             "Per month",
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(
+                              color:
+                                  isPerMonth ? Colors.white : Color(0xFF292D32),
+                            ),
                           )),
                       SizedBox(width: 10),
                       ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             elevation: 0,
-                            backgroundColor: Color(0xFF3085FE),
+                            backgroundColor: isPerMonth
+                                ? Color(0xFFEEEFF0)
+                                : Color(0xFF3085FE),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10)),
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            setState(() {
+                              isPerMonth = false;
+                            });
+                          },
                           child: Text(
                             "Per Contarct",
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(
+                              color:
+                                  isPerMonth ? Color(0xFF292D32) : Colors.white,
+                            ),
                           )),
                     ],
                   )),

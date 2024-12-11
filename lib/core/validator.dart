@@ -55,10 +55,10 @@ String? passwordValidator(String? value) {
   }
 
   // At least one uppercase, one lowercase, one number
-  final passwordRegex = RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$');
-  if (!passwordRegex.hasMatch(value)) {
-    return 'Password must contain uppercase, lowercase and number';
-  }
+  // final passwordRegex = RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$');
+  // if (!passwordRegex.hasMatch(value)) {
+  //   return 'Password must contain uppercase, lowercase and number';
+  // }
 
   return null;
 }

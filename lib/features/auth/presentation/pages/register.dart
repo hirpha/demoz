@@ -123,7 +123,7 @@ class _RegisterPageState extends State<RegisterPage> {
           backgroundColor: const Color.fromARGB(255, 255, 255, 255),
           leading: IconButton(
             onPressed: () => Navigator.pop(context),
-            icon: const Icon(Icons.arrow_back_ios),
+            icon: const Icon(Icons.arrow_back_rounded),
           ),
         ),
         body: SingleChildScrollView(
